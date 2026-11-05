@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AWS Student Builder Group · Escuela Colombiana de Ingeniería</title>
+  <meta name="description" content="Comunidad estudiantil de la Escuela Colombiana de Ingeniería respaldada por AWS para aprender, construir y conectar en la nube. Lanzamiento: 18 de noviembre de 2026.">
+  <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1116" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AWS Student Builder Group · ECI">
+  <meta property="og:description" content="Construyendo comunidad, talento y proyectos en la nube.">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:image" content="https://aws-student-builder-group-escuela.github.io/awsbg-web/assets/img/brand/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
+
+  <!-- Theme before paint (no flash) + JS flag -->
+  <script>
+    (function (d) {
+      d.className = d.className.replace('no-js', 'js');
+      try { var t = localStorage.getItem('awssbg-theme'); if (t) d.setAttribute('data-theme', t); } catch (e) {}
+      // Language: stored choice, else browser language. Hide until translated (no flash).
+      try {
+        var l = localStorage.getItem('awssbg-lang') || ((navigator.language || 'es').toLowerCase().indexOf('es') === 0 ? 'es' : 'en');
+        if (l !== 'es') { d.lang = l; d.className += ' i18n-pending'; }
+      } catch (e) {}
+    })(document.documentElement);
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <script type="module" src="assets/js/main.js"></script>
+</head>
+<body class="has-dark-hero">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ================================================================== -->
+  <!-- Header                                                              -->
+  <!-- ================================================================== -->
+  <header class="site-header" data-header>
+    <div class="site-header__bar theme-ink">
+      <a class="brand" href="index.html" aria-label="AWS Student Builder Group ECI — inicio">
+        <span class="brand__mark" aria-hidden="true"><img src="assets/img/brand/logo-128.webp" alt="" width="64" height="64"></span>
+        <span class="brand__text">AWS Student Builder Group<small>Escuela Colombiana de Ingeniería</small></span>
+        <span class="brand__short" aria-hidden="true">AWS SBG</span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <ul class="nav__menu" id="nav-menu">
+          <li><a class="nav__link" href="#comunidad">Comunidad</a></li>
+          <li><a class="nav__link" href="#modelo">Cómo funciona</a></li>
+          <li><a class="nav__link" href="#beneficios">Beneficios</a></li>
+          <li><a class="nav__link" href="#equipo">Quiénes somos</a></li>
+          <li><a class="nav__link" href="lanzamiento.html">Lanzamiento</a></li>
+          <li class="nav__cta"><a class="btn btn--primary btn--sm" href="#unete">Únete <svg class="icon icon--arrow" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-arrow"/></svg></a></li>
+        </ul>
+        <div class="nav__tools">
+          <button class="lang-toggle" type="button" data-lang-toggle data-i18n-dynamic aria-label="Switch to English" lang="en">
+            <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-translate"/></svg>
+            <span class="lang-toggle__opt" data-lang-opt="es" aria-hidden="true">ES</span>
+            <span class="lang-toggle__opt" data-lang-opt="en" aria-hidden="true">EN</span>
+          </button>
+          <button class="theme-toggle" type="button" data-theme-toggle data-i18n-dynamic aria-label="Cambiar tema" aria-pressed="false">
+            <svg class="icon icon--moon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-moon"/></svg>
+            <svg class="icon icon--sun" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-sun"/></svg>
+          </button>
+          <button class="nav__toggle" type="button" data-nav-toggle data-i18n-dynamic aria-controls="nav-menu" aria-expanded="false" aria-label="Abrir menú">
+            <span class="nav__toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ================================================================ -->
+    <!-- Hero                                                              -->
+    <!-- ================================================================ -->
+    <section class="hero theme-ink" data-pixel-field aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="hero__kicker" data-hero style="--d:0">
+            <span class="tag tag--live">Lanzamiento · 18 nov 2026</span>
+            <span>Escuela Colombiana de Ingeniería Julio Garavito</span>
+          </p>
+          <h1 class="hero__title" id="hero-title">Construimos comunidad, talento y proyectos en la <em>nube</em>.</h1>
+          <p class="hero__lede" data-hero style="--d:650">Somos el AWS Student Builder Group de la Escuela: una comunidad universitaria respaldada por AWS para aprender, construir y conectar, sin importar tu carrera o tu nivel técnico.</p>
+          <div class="btn-row hero__actions" data-hero style="--d:800">
+            <a class="btn btn--primary" href="#unete" data-magnetic>Únete a la comunidad <svg class="icon icon--arrow" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-arrow"/></svg></a>
+            <a class="btn" href="lanzamiento.html">Ver el lanzamiento</a>
+          </div>
+          <dl class="hero__meta" data-hero style="--d:950">
+            <div><dt>Fecha</dt><dd>18 nov</dd></div>
+            <div><dt>Hora</dt><dd>10:00 a. m.</dd></div>
+            <div><dt>Charlas</dt><dd>2</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <svg class="network" viewBox="0 0 440 440" role="presentation">
+            <g>
+              <path class="network__edge" pathLength="1" style="--i:0" d="M145 200 H90 V106"/>
+              <path class="network__edge" pathLength="1" style="--i:1" d="M295 200 H350 V96"/>
+              <path class="network__edge" pathLength="1" style="--i:2" d="M295 225 H360 V304"/>
+              <path class="network__edge" pathLength="1" style="--i:3" d="M145 225 H80 V334"/>
+              <path class="network__edge network__edge--dashed" d="M150 80 H280" stroke-dasharray="3 6"/>
+              <path class="network__edge network__edge--dashed" d="M140 360 H280" stroke-dasharray="3 6"/>
+              <path class="network__flow" data-tone="orange" d="M145 200 H90 V106"/>
+              <path class="network__flow" data-tone="blue" d="M295 200 H350 V96"/>
+              <path class="network__flow" data-tone="green" d="M295 225 H360 V304"/>
+              <path class="network__flow" data-tone="pink" d="M145 225 H80 V334"/>
+              <circle class="network__dot" cx="90" cy="200" r="3.5"/>
+              <circle class="network__dot" cx="350" cy="200" r="3.5"/>
+              <circle class="network__dot" cx="360" cy="225" r="3.5"/>
+              <circle class="network__dot" cx="80" cy="225" r="3.5"/>
+            </g>
+            <rect class="network__pulse" x="145" y="177" width="150" height="70" rx="6"/>
+            <g class="network__node network__node--hub" style="--i:0">
+              <rect x="145" y="177" width="150" height="70" rx="6"/>
+              <text x="160" y="207">Comunidad</text>
+              <text class="network__sub" x="160" y="228">AWS SBG · ECI</text>
+            </g>
+            <g class="network__node" data-tone="orange" style="--i:1">
+              <rect x="30" y="54" width="120" height="52" rx="6"/>
+              <text x="44" y="78">Eventos</text>
+              <text class="network__sub" x="44" y="95">WORKSHOPS</text>
+            </g>
+            <g class="network__node" data-tone="blue" style="--i:2">
+              <rect x="280" y="44" width="150" height="52" rx="6"/>
+              <text x="294" y="68">Aprendizaje</text>
+              <text class="network__sub" x="294" y="85">CLOUD · IA · DATOS</text>
+            </g>
+            <g class="network__node" data-tone="green" style="--i:3">
+              <rect x="280" y="304" width="150" height="52" rx="6"/>
+              <text x="294" y="328">Proyectos</text>
+              <text class="network__sub" x="294" y="345">SOLUCIONES REALES</text>
+            </g>
+            <g class="network__node" data-tone="pink" style="--i:4">
+              <rect x="20" y="334" width="120" height="52" rx="6"/>
+              <text x="34" y="358">Liderazgo</text>
+              <text class="network__sub" x="34" y="375">ESTUDIANTES</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee (decorative) -->
+    <div class="marquee theme-orange" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group"><span class="marquee__item">Amazon Web Services</span><span class="marquee__item marquee__item--outline">Cloud</span><span class="marquee__item">Inteligencia Artificial</span><span class="marquee__item marquee__item--outline">DevOps</span><span class="marquee__item">Datos</span><span class="marquee__item marquee__item--outline">Seguridad</span><span class="marquee__item">Serverless</span><span class="marquee__item marquee__item--outline">Machine Learning</span><span class="marquee__item">Comunidad</span><span class="marquee__item marquee__item--outline">Liderazgo</span></div>
+        <div class="marquee__group"><span class="marquee__item">Amazon Web Services</span><span class="marquee__item marquee__item--outline">Cloud</span><span class="marquee__item">Inteligencia Artificial</span><span class="marquee__item marquee__item--outline">DevOps</span><span class="marquee__item">Datos</span><span class="marquee__item marquee__item--outline">Seguridad</span><span class="marquee__item">Serverless</span><span class="marquee__item marquee__item--outline">Machine Learning</span><span class="marquee__item">Comunidad</span><span class="marquee__item marquee__item--outline">Liderazgo</span></div>
+      </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- ¿Qué es?                                                          -->
+    <!-- ================================================================ -->
+    <section class="section pattern-grid" id="comunidad" aria-labelledby="comunidad-title">
+      <div class="mosaic mosaic--tr" data-mosaic="chat" aria-hidden="true"></div>
+      <div class="mosaic mosaic--bl mosaic--sm mosaic--float" data-mosaic="sparkle" data-color="g" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="eyebrow">¿Qué es un Student Builder Group?</p>
+            <h2 id="comunidad-title">Una comunidad para aprender, construir y conectar.</h2>
+          </div>
+          <p class="section-head__lede">Los AWS Student Builder Groups son comunidades universitarias respaldadas por AWS. Aquí la nube deja de ser teoría y se convierte en proyectos.</p>
+        </header>
+
+        <ol class="pillars" data-reveal-group>
+          <li data-tone="blue" class="pillar" data-reveal>
+            <svg class="icon pillar__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-cloud"/></svg>
+            <h3>Aprender</h3>
+            <p>Explorar la computación en la nube y desarrollar habilidades técnicas con material y sesiones prácticas.</p>
+          </li>
+          <li data-tone="green" class="pillar" data-reveal>
+            <svg class="icon pillar__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-build"/></svg>
+            <h3>Construir</h3>
+            <p>Crear proyectos reales e impulsar iniciativas propuestas por estudiantes dentro de la universidad.</p>
+          </li>
+          <li data-tone="pink" class="pillar" data-reveal>
+            <svg class="icon pillar__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-users"/></svg>
+            <h3>Conectar</h3>
+            <p>Encontrarte con estudiantes que comparten tus intereses y con profesionales de la comunidad AWS.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ¿Cómo funciona?                                                   -->
+    <!-- ================================================================ -->
+    <section class="section theme-navy" id="modelo" aria-labelledby="modelo-title">
+      <div class="mosaic mosaic--tr" data-mosaic="star" aria-hidden="true"></div>
+      <div class="mosaic mosaic--bl mosaic--sm mosaic--float" data-mosaic="sparkle" data-color="k" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="eyebrow">¿Cómo funciona?</p>
+            <h2 id="modelo-title">Cinco componentes que se conectan entre sí.</h2>
+          </div>
+          <p class="section-head__lede">Del primer evento al primer proyecto en producción: cada pieza alimenta a la siguiente.</p>
+        </header>
+
+        <ol class="process" data-reveal-group>
+          <li data-tone="orange" class="process__step" data-reveal>
+            <span class="process__node" aria-hidden="true">01</span>
+            <div class="process__body"><h3>Comunidad</h3><p>Un espacio donde los estudiantes pueden participar y conectar.</p></div>
+          </li>
+          <li data-tone="purple" class="process__step" data-reveal>
+            <span class="process__node" aria-hidden="true">02</span>
+            <div class="process__body"><h3>Eventos</h3><p>Charlas, workshops, sesiones prácticas y actividades.</p></div>
+          </li>
+          <li data-tone="pink" class="process__step" data-reveal>
+            <span class="process__node" aria-hidden="true">03</span>
+            <div class="process__body"><h3>Aprendizaje</h3><p>AWS, cloud, IA, DevOps, datos, seguridad y otras tecnologías.</p></div>
+          </li>
+          <li data-tone="green" class="process__step" data-reveal>
+            <span class="process__node" aria-hidden="true">04</span>
+            <div class="process__body"><h3>Proyectos</h3><p>Convertir el conocimiento en aplicaciones y soluciones reales.</p></div>
+          </li>
+          <li data-tone="blue" class="process__step" data-reveal>
+            <span class="process__node" aria-hidden="true">05</span>
+            <div class="process__body"><h3>Liderazgo</h3><p>Estudiantes organizando, enseñando y creando nuevas oportunidades.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Colombia en cifras                                                -->
+    <!-- ================================================================ -->
+    <section class="section theme-green pattern-grid" id="cifras" aria-labelledby="cifras-title">
+      <div class="mosaic mosaic--br" data-mosaic="bolt" aria-hidden="true"></div>
+      <div class="mosaic mosaic--tl mosaic--sm mosaic--float" data-mosaic="sparkle" data-color="p" aria-hidden="true"></div>
+      <div class="container stats">
+        <div class="stats__intro" data-reveal="left">
+          <p class="eyebrow">Colombia en cifras</p>
+          <h2 id="cifras-title">No empezamos solos: hay una red en todo el país.</h2>
+          <p>Comunidades AWS con presencia en múltiples ciudades de Colombia.</p>
+        </div>
+        <div class="stats__list" data-reveal-group>
+          <div class="stat" data-reveal>
+            <span class="stat__value"><span data-count="14">14</span></span>
+            <span class="stat__label">AWS Student Builder Groups</span>
+            <p class="stat__desc">Enfocados en estudiantes universitarios y en la construcción de habilidades.</p>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat__value"><span data-count="16">16</span></span>
+            <span class="stat__label">AWS User Groups</span>
+            <p class="stat__desc">Conectan a builders y profesionales de la comunidad local.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ¿Quién puede participar?                                          -->
+    <!-- ================================================================ -->
+    <section class="section" id="participar" aria-labelledby="participar-title">
+      <div class="mosaic mosaic--bl" data-mosaic="bulb" aria-hidden="true"></div>
+      <div class="mosaic mosaic--tr mosaic--sm" data-mosaic="smile" aria-hidden="true"></div>
+      <div class="container split">
+        <div class="split__title" data-reveal="left">
+          <p class="eyebrow">¿Quién puede participar?</p>
+          <h2 id="participar-title">Una comunidad abierta.</h2>
+          <p>No necesitas saber de nube para empezar. Solo ganas de aprender y de construir con otros.</p>
+        </div>
+        <ul class="checklist" data-reveal-group>
+          <li data-reveal>
+            <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-check"/></svg>
+            <div><strong>Estudiantes matriculados</strong><span>Activamente inscritos en una institución de educación superior.</span></div>
+          </li>
+          <li data-reveal>
+            <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-check"/></svg>
+            <div><strong>Mayores de 18 años</strong><span>Requisito del programa de AWS.</span></div>
+          </li>
+          <li data-reveal>
+            <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-check"/></svg>
+            <div><strong>De cualquier carrera y nivel</strong><span>Interesados en tecnología, cloud y construcción de proyectos.</span></div>
+          </li>
+          <li data-reveal>
+            <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-check"/></svg>
+            <div><strong>Profesores</strong><span>Bienvenidos a acompañar, mentorear y proponer iniciativas.</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Beneficios                                                        -->
+    <!-- ================================================================ -->
+    <section class="section theme-ink pattern-grid" id="beneficios" aria-labelledby="beneficios-title">
+      <div class="mosaic mosaic--tr" data-mosaic="trophy" aria-hidden="true"></div>
+      <div class="mosaic mosaic--bl mosaic--sm mosaic--float" data-mosaic="sparkle" data-color="g" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="eyebrow">¿Qué beneficios ofrece?</p>
+            <h2 id="beneficios-title">Recursos reales para construir en serio.</h2>
+          </div>
+          <p class="section-head__lede">AWS respalda a los Student Builder Groups con recursos que la comunidad pone al servicio de sus miembros.</p>
+        </header>
+
+        <ul class="benefits" data-reveal-group>
+          <li data-tone="orange" class="benefit benefit--feature" data-reveal>
+            <svg class="icon benefit__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-credit"/></svg>
+            <h3>Créditos de AWS</h3>
+            <p>Para experimentar y desplegar proyectos en la nube sin que el costo sea una barrera.</p>
+          </li>
+          <li data-tone="purple" class="benefit benefit--feature" data-reveal>
+            <svg class="icon benefit__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-badge"/></svg>
+            <h3>Vouchers de certificación</h3>
+            <p>Vales para exámenes de AWS Certification. En el lanzamiento te contamos cómo acceder.</p>
+          </li>
+          <li data-tone="pink" class="benefit" data-reveal>
+            <svg class="icon benefit__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-handshake"/></svg>
+            <h3>Contacto con profesionales</h3>
+            <p>Charlas y espacios con personas que trabajan en AWS.</p>
+          </li>
+          <li data-tone="green" class="benefit" data-reveal>
+            <svg class="icon benefit__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-box"/></svg>
+            <h3>Recursos para la comunidad</h3>
+            <p>Apoyo para organizar actividades y eventos.</p>
+          </li>
+          <li data-tone="blue" class="benefit" data-reveal>
+            <svg class="icon benefit__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-star"/></svg>
+            <h3>Liderazgo</h3>
+            <p>Desarrollo de habilidades organizando, enseñando y creando.</p>
+          </li>
+          <li data-tone="orange" class="benefit" data-reveal>
+            <svg class="icon benefit__icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-globe"/></svg>
+            <h3>Red estudiantil</h3>
+            <p>Conexión con otras comunidades estudiantiles del país.</p>
+          </li>
+        </ul>
+        <p class="benefits__note">* Los beneficios son otorgados por AWS a los Student Builder Group Leaders y están sujetos a los términos del programa.</p>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Quiénes somos                                                     -->
+    <!-- TODO: reemplazar nombres, carreras y enlaces. Para usar foto,      -->
+    <!-- cambia <span class="avatar__initials"> por                         -->
+    <!-- <img src="assets/img/team/nombre.webp" alt="" width="400" height="500" loading="lazy"> -->
+    <!-- ================================================================ -->
+    <section class="section pattern-grid" id="equipo" aria-labelledby="equipo-title">
+      <div class="mosaic mosaic--tr" data-mosaic="heart" aria-hidden="true"></div>
+      <div class="mosaic mosaic--bl mosaic--sm mosaic--float" data-mosaic="dots" data-color="o" aria-hidden="true"></div>
+      <div class="container">
+        <div class="team-intro" data-reveal>
+          <div>
+            <p class="eyebrow">Quiénes somos</p>
+            <h2 id="equipo-title">Las personas detrás de la comunidad.</h2>
+          </div>
+          <p>Somos estudiantes de la Escuela que decidimos traer la nube al campus. Organizamos, enseñamos y aprendemos en el camino, igual que tú.</p>
+        </div>
+
+        <!-- Leader -->
+        <article class="member member--lead" data-tone="orange" data-reveal data-tilt="2">
+          <div class="avatar">
+            <img src="assets/img/team/leader.webp" alt="" width="480" height="600" loading="lazy" decoding="async">
+          </div>
+          <div>
+            <span class="member__role">AWS SBG Leader</span>
+            <h3 class="member__name">Jenny Paulin Guevara Salamanca</h3>
+            <p class="member__meta">Estudiante de maestría</p>
+            <p class="member__bio">Impulsa la comunidad en el campus: la hace crecer, acerca las tecnologías cloud a la universidad y crea oportunidades para que otros estudiantes aprendan y construyan.</p>
+            <ul class="member__duties">
+              <li>Hacer crecer la comunidad</li>
+              <li>Organizar eventos y actividades</li>
+              <li>Impulsar iniciativas estudiantiles</li>
+              <li>Conectar con profesionales y comunidades</li>
+            </ul>
+            <!-- TODO: enlaces (LinkedIn/GitHub) en <div class="member__links"> -->
+          </div>
+        </article>
+
+        <!-- Core Team -->
+        <div class="core-team">
+          <div class="core-team__head">
+            <h3>Core Team</h3>
+            <p>Cinco líderes que trabajan junto al AWS SBG Leader en la organización, ejecución y crecimiento de la comunidad.</p>
+          </div>
+
+          <ul class="team-grid" data-reveal-group>
+            <li data-tone="purple" class="member" data-reveal data-tilt="10">
+              <div class="avatar"><img src="assets/img/team/logistics-events.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></div>
+              <span class="member__role">Logistics &amp; Events Lead</span>
+              <h4 class="member__name">Jairo Rodriguez Alba</h4>
+              <p class="member__meta">Estudiante de maestría</p>
+            </li>
+            <li data-tone="pink" class="member" data-reveal data-tilt="10">
+              <div class="avatar"><img src="assets/img/team/marketing-community.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></div>
+              <span class="member__role">Marketing &amp; Community Lead</span>
+              <h4 class="member__name">Nicolás Sánchez Rodríguez</h4>
+              <p class="member__meta">Estudiante de maestría</p>
+            </li>
+            <li data-tone="blue" class="member" data-reveal data-tilt="10">
+              <div class="avatar"><img src="assets/img/team/tech-lead.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></div>
+              <span class="member__role">Tech Lead</span>
+              <h4 class="member__name">Edwin Gustavo Sierra Poveda</h4>
+              <p class="member__meta">Estudiante de maestría</p>
+            </li>
+            <li data-tone="green" class="member" data-reveal data-tilt="10">
+              <div class="avatar"><img src="assets/img/team/partnership-academy.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></div>
+              <span class="member__role">Partnerships &amp; Academy Lead</span>
+              <h4 class="member__name">Juan Esteban Sánchez García</h4>
+              <p class="member__meta">Ingeniería de Sistemas y Ciberseguridad</p>
+            </li>
+            <li data-tone="orange" class="member" data-reveal data-tilt="10">
+              <div class="avatar"><img src="assets/img/team/planning-monitoring.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></div>
+              <span class="member__role">Planning &amp; Monitoring Lead</span>
+              <h4 class="member__name">Natalia Mahecha Castillo</h4>
+              <p class="member__meta">Ingeniería de Sistemas</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="team-cta" data-reveal>
+          <p>¿Quieres organizar, enseñar o proponer algo?</p>
+          <a class="link-arrow" href="#unete">Súmate a la comunidad <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Lanzamiento                                                       -->
+    <!-- ================================================================ -->
+    <section class="section theme-pink pattern-grid" id="lanzamiento" aria-labelledby="lanzamiento-title">
+      <div class="mosaic mosaic--br" data-mosaic="rocket" aria-hidden="true"></div>
+      <div class="mosaic mosaic--tl mosaic--sm mosaic--float" data-mosaic="sparkle" data-color="g" aria-hidden="true"></div>
+      <div class="container">
+        <article class="ticket" data-reveal="scale" data-tilt="3">
+          <div class="ticket__date">
+            <span class="ticket__weekday">Miércoles</span>
+            <div>
+              <span class="ticket__day" data-count="18">18</span>
+              <span class="ticket__month">Noviembre 2026</span>
+            </div>
+          </div>
+          <div class="ticket__body">
+            <div>
+              <p class="eyebrow">Evento de lanzamiento</p>
+              <h2 id="lanzamiento-title">Dos conferencias para arrancar la comunidad.</h2>
+            </div>
+            <ul class="ticket__facts">
+              <li><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-clock"/></svg> 10:00 a. m. – 11:30 a. m.</li>
+              <li><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-pin"/></svg> Salón A-301 · Escuela Colombiana de Ingeniería</li>
+              <li><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-users"/></svg> Para todos los programas, con o sin conocimientos técnicos</li>
+            </ul>
+            <ul class="ticket__talks">
+              <li><span class="ticket__speaker"><img src="assets/img/speakers/santiago-jejen.webp" alt="" width="240" height="240" loading="lazy" decoding="async"></span><div><span>Charla 1 · Santiago Jejen</span><strong>Más allá del servidor</strong></div></li>
+              <li><span class="ticket__speaker"><img src="assets/img/speakers/john-avila.webp" alt="" width="240" height="240" loading="lazy" decoding="async"></span><div><span>Charla 2 · John Ávila, AWS</span><strong>AI-First Business</strong></div></li>
+            </ul>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="lanzamiento.html" data-magnetic>Detalles del evento <svg class="icon icon--arrow" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-arrow"/></svg></a>
+              <button class="btn" type="button" data-add-calendar><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-calendar"/></svg> Agregar al calendario</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Únete                                                             -->
+    <!-- ================================================================ -->
+    <section class="section" id="unete" aria-labelledby="unete-title">
+      <div class="mosaic mosaic--bl" data-mosaic="flag" aria-hidden="true"></div>
+      <div class="mosaic mosaic--tr mosaic--sm mosaic--float" data-mosaic="sparkle" data-color="p" aria-hidden="true"></div>
+      <div class="container join">
+        <div class="join__title" data-reveal="left">
+          <p class="eyebrow">Únete a la comunidad</p>
+          <h2 id="unete-title">Dos pasos y nos vemos el 18.</h2>
+          <p>Escanea los códigos o usa los botones. Aprende, construye y conecta con nosotros.</p>
+        </div>
+        <ol class="join__steps" data-reveal-group>
+          <li data-tone="green" class="join-step" data-reveal>
+            <div>
+              <span class="join-step__n"></span>
+              <h3>Crea tu AWS Builder ID</h3>
+              <p>Tu identidad gratuita para acceder a recursos de aprendizaje y a la comunidad de AWS.</p>
+              <a class="btn btn--sm" href="https://qr.link/sxMq7F" target="_blank" rel="noopener">Crear Builder ID <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-arrow-up-right"/></svg><span class="visually-hidden">(abre en una pestaña nueva)</span></a>
+            </div>
+            <button class="join-step__qr-btn" type="button" data-qr-zoom><span class="visually-hidden">Ampliar</span><img class="join-step__qr" src="assets/img/qr/builder-id.png" width="642" height="645" alt="Código QR para crear tu AWS Builder ID" loading="lazy"><span class="join-step__qr-hint" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-zoom"/></svg></span></button>
+          </li>
+          <li data-tone="purple" class="join-step" data-reveal>
+            <div>
+              <span class="join-step__n"></span>
+              <h3>Únete al grupo en Meetup</h3>
+              <p>Ahí publicamos eventos, workshops y convocatorias.</p>
+              <a class="btn btn--sm" href="https://www.meetup.com/aws-sbg-at-colombian-school-of-engineering-julio-garavito/events/316967537/" target="_blank" rel="noopener">Ir a Meetup <svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-arrow-up-right"/></svg><span class="visually-hidden">(abre en una pestaña nueva)</span></a>
+            </div>
+            <button class="join-step__qr-btn" type="button" data-qr-zoom><span class="visually-hidden">Ampliar</span><img class="join-step__qr" src="assets/img/qr/meetup.png" width="530" height="530" alt="Código QR del grupo en Meetup" loading="lazy"><span class="join-step__qr-hint" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-zoom"/></svg></span></button>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================== -->
+  <!-- Footer                                                              -->
+  <!-- ================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <a class="brand" href="index.html">
+            <span class="brand__mark" aria-hidden="true"><img src="assets/img/brand/logo-128.webp" alt="" width="64" height="64"></span>
+            <span class="brand__text">AWS Student Builder Group<small>Escuela Colombiana de Ingeniería</small></span>
+          </a>
+          <p class="footer__tagline">Aprende, construye y conecta con nosotros.</p>
+          <p class="footer__love">Hecho con <svg class="icon footer__heart" viewBox="0 0 8 7" role="img" aria-label="amor"><use href="assets/img/icons/sprite.svg#i-heart"/></svg> por estudiantes de la Escuela.</p>
+        </div>
+        <div class="footer__cols">
+          <div>
+            <h2>Comunidad</h2>
+            <ul>
+              <li><a href="#comunidad">Qué es</a></li>
+              <li><a href="#modelo">Cómo funciona</a></li>
+              <li><a href="#beneficios">Beneficios</a></li>
+              <li><a href="#equipo">Quiénes somos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Eventos</h2>
+            <ul>
+              <li><a href="lanzamiento.html">Lanzamiento</a></li>
+              <li><a href="#unete">Únete</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Enlaces</h2>
+            <ul>
+              <li><a href="https://qr.link/sxMq7F" target="_blank" rel="noopener">AWS Builder ID</a></li>
+              <li><a href="https://www.meetup.com/aws-sbg-at-colombian-school-of-engineering-julio-garavito/events/316967537/" target="_blank" rel="noopener">Meetup</a></li>
+              <li><a href="https://www.escuelaing.edu.co/" target="_blank" rel="noopener">Escuela de Ingeniería</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© <span data-year>2026</span> AWS Student Builder Group · ECI. Comunidad estudiantil.</p>
+        <p>AWS es una marca de Amazon.com, Inc. o sus afiliadas.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
