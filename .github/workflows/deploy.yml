@@ -1,0 +1,87 @@
+# CI/CD del sitio: verifica en cada push y PR; despliega a GitHub Pages
+# solo desde `main` y solo si todas las verificaciones pasan.
+#
+# Requisito único: Settings → Pages → Build and deployment → Source: "GitHub Actions".
+
+name: CI/CD · GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Un PR nuevo cancela su ejecución anterior; los despliegues de main nunca se cancelan a medias.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verify:
+    name: Verificar (HTML · enlaces · accesibilidad)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar herramientas de verificación
+        run: npm ci
+
+      - name: Validar HTML (html-validate)
+        run: npm run test:html
+
+      - name: Verificar enlaces, anclas, íconos e imports
+        run: npm run test:links
+
+      - name: Auditoría de accesibilidad y runtime (axe-core + Chrome)
+        run: npm run test:a11y
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+
+  deploy:
+    name: Desplegar en GitHub Pages
+    needs: verify
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write      # publicar en Pages
+      id-token: write   # verificar el origen del despliegue (OIDC)
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # Solo se publica lo que el sitio necesita: nada de README, scripts,
+      # package.json ni configuración del repo.
+      - name: Preparar el artefacto del sitio
+        run: |
+          mkdir -p _site
+          cp index.html lanzamiento.html 404.html _site/
+          cp -r assets _site/
+          echo "Archivos publicados: $(find _site -type f | wc -l)"
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@v4
