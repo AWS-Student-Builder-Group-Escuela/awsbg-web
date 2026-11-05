@@ -25,3 +25,6 @@
 
 /* Bigger logo in the footer */
 .site-footer .brand__mark { width: 3.5rem; height: 3.5rem; }
+
+/* Heart stays inline between the surrounding text */
+.footer__heart { display: inline; vertical-align: middle; }

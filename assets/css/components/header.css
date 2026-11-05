@@ -94,7 +94,8 @@
 .nav__toggle:hover, .theme-toggle:hover { border-color: var(--c-text); background: rgb(255 255 255 / 0.06); }
 .theme-toggle:active { transform: rotate(-20deg) scale(0.92); }
 
-/* Theme icon swap */
+/* Theme icon swap — both share the same grid cell so only the visible one shows */
+.theme-toggle .icon { grid-area: 1 / 1; }
 .theme-toggle .icon--sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .icon--sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .icon--moon { display: none; }
