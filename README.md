@@ -1,304 +1,294 @@
-<div align="center">
+# AWS Student Builder Group · ECI — Sitio web
 
-🟧🟪🟥🟩🟦⬛🟧🟪🟥🟩🟦
+Sitio estático del AWS Student Builder Group de la Escuela Colombiana de Ingeniería Julio Garavito.
+Está construido con HTML, CSS y JavaScript nativos, sin frameworks, dependencias ni proceso de build, y se publica con GitHub Pages.
 
-# AWS Student Builder Group · ECI
-
-**Construyendo comunidad, talento y proyectos en la nube.**
-
-Sitio web oficial del AWS Student Builder Group de la
-**Escuela Colombiana de Ingeniería Julio Garavito**.
-
-[![Sitio en vivo](https://img.shields.io/badge/sitio-en%20vivo-FF9900?style=for-the-badge&logo=github&logoColor=white&labelColor=161D26)](https://aws-student-builder-group-escuela.github.io/awsbg-web/)
-![HTML5](https://img.shields.io/badge/HTML5-semántico-E34F26?style=for-the-badge&logo=html5&logoColor=white&labelColor=161D26)
-![CSS3](https://img.shields.io/badge/CSS-modular-AD5CFF?style=for-the-badge&logo=css3&logoColor=white&labelColor=161D26)
-![JavaScript](https://img.shields.io/badge/JS-vanilla-00E582?style=for-the-badge&logo=javascript&logoColor=white&labelColor=161D26)
-![Sin frameworks](https://img.shields.io/badge/frameworks-0-42B4FF?style=for-the-badge&labelColor=161D26)
-
-🟦🟩🟥🟪🟧⬛🟦🟩🟥🟪🟧
-
-</div>
+**Producción:** https://aws-student-builder-group-escuela.github.io/awsbg-web/
 
 ---
 
-## 📌 Tabla de contenido
+## Contenido
 
-- [¿Qué es esto?](#-qué-es-esto)
-- [¿Qué encuentras en la página?](#-qué-encuentras-en-la-página)
-- [Sistema de diseño](#-sistema-de-diseño)
-- [Scaffolding (estructura del proyecto)](#️-scaffolding-estructura-del-proyecto)
-- [Correr el proyecto en local](#-correr-el-proyecto-en-local)
-- [Guías rápidas de mantenimiento](#️-guías-rápidas-de-mantenimiento)
-- [Accesibilidad y rendimiento](#-accesibilidad-y-rendimiento)
-- [Despliegue](#-despliegue)
-- [Pendientes de contenido](#-pendientes-de-contenido)
-
----
-
-## 🚀 ¿Qué es esto?
-
-Un **AWS Student Builder Group** es una comunidad universitaria respaldada por AWS para
-**aprender, construir y conectar** alrededor de la nube. Este repositorio contiene el sitio
-estático de la comunidad de la ECI: quiénes somos, cómo funciona, qué beneficios hay y
-todo sobre el **lanzamiento del 18 de noviembre de 2026**.
-
-Es un sitio **100 % estático**: HTML, CSS y JavaScript sin frameworks ni proceso de build.
-Se publica directamente con **GitHub Pages**.
+- [Stack](#stack)
+- [Requisitos](#requisitos)
+- [Ejecución local](#ejecución-local)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Arquitectura](#arquitectura)
+  - [CSS](#css)
+  - [JavaScript](#javascript)
+  - [Internacionalización (ES/EN)](#internacionalización-esen)
+  - [Temas y paleta](#temas-y-paleta)
+  - [API de atributos `data-*`](#api-de-atributos-data-)
+  - [Persistencia en el navegador](#persistencia-en-el-navegador)
+- [Desarrollo](#desarrollo)
+- [Accesibilidad y rendimiento](#accesibilidad-y-rendimiento)
+- [Compatibilidad](#compatibilidad)
+- [Despliegue](#despliegue)
+- [Convenciones](#convenciones)
 
 ---
 
-## 🧭 ¿Qué encuentras en la página?
+## Stack
 
-### `index.html` — La comunidad
+| Capa | Tecnología |
+|---|---|
+| Marcado | HTML5 semántico |
+| Estilos | CSS3 modular (custom properties, `@import`, `clamp()`, `color-mix()`, `:has()`) |
+| Lógica | JavaScript ES2020+ como **ES modules nativos** (sin bundler) |
+| Tipografías | Space Grotesk + Inter (Google Fonts) |
+| Hosting | GitHub Pages (rama `main`, raíz del repo) |
 
-| Sección | Qué cuenta | Fondo |
-|---|---|---|
-| **Hero** | Mensaje principal, CTA y diagrama de la comunidad con paquetes de datos animados | ⬛ Squid ink + píxeles que titilan |
-| **Cinta** | Tecnologías: Cloud, IA, DevOps, Serverless… | 🟧 Naranja |
-| **¿Qué es?** | Aprender · Construir · Conectar | ⬜ Claro + cuadrícula |
-| **¿Cómo funciona?** | Los 5 componentes: Comunidad, Eventos, Aprendizaje, Proyectos, Liderazgo | 🟦 Azul oscuro |
-| **Colombia en cifras** | 14 Student Builder Groups · 16 User Groups | 🟩 Verde |
-| **¿Quién puede participar?** | Requisitos para unirse | ⬜ Claro |
-| **Beneficios** | Créditos, vouchers de certificación, contacto con AWS… | ⬛ Squid ink |
-| **Quiénes somos** | Líder y Core Team (5 personas) | ⬜ Claro + cuadrícula |
-| **Lanzamiento** | Ticket del evento con "Agregar al calendario" | 🟥 Rosado |
-| **Únete** | Builder ID + grupo de Meetup (con QR) | ⬜ Claro |
-
-### `lanzamiento.html` — El evento
-
-Cuenta regresiva en vivo, datos del evento, las dos charlas, la agenda y el registro.
-
-### `404.html` — Página no encontrada
-
-"Este recurso no está en nuestra región." 🌎
-
-### ✨ Detalles que hacen la diferencia
-
-- 🌐 **Español ⇄ Inglés.** Botón en el header que recuerda tu elección y detecta el idioma del navegador.
-- 🌗 **Modo claro / oscuro** con preferencia guardada.
-- 🐍 **Serpiente pixelada.** Recorre los márgenes laterales comiendo píxeles de colores. Nunca tapa el texto y se pausa con un botón.
-- 🧩 **Sprites de píxeles en cada sección**: corazón, cohete, trofeo, bombillo, carita, chat, micrófono, reloj… con colores pensados para cada fondo.
-- 🎞️ **Animaciones.** Títulos que suben palabra por palabra, contadores, inclinación 3D, botones magnéticos, confeti al agregar al calendario y transición entre páginas.
-- 🧭 **Header flotante.** Se compacta al hacer scroll, se esconde al bajar, vuelve al subir, y una píldora se desliza al enlace activo.
-- 📅 **Agregar al calendario**: Google Calendar, Outlook o archivo `.ics` (Apple Calendar y otros).
+No hay `package.json` ni dependencias de runtime. Node.js solo hace falta si quieres usar `npx serve` como servidor local.
 
 ---
 
-## 🎨 Sistema de diseño
+## Requisitos
 
-Paleta tomada de las presentaciones de la comunidad AWS:
+- Un navegador moderno (ver [Compatibilidad](#compatibilidad)).
+- Un servidor HTTP estático para desarrollo. Cualquiera de estos:
+  - Node.js 18+ (`npx serve`)
+  - Python 3 (`python -m http.server`)
+  - La extensión *Live Server* de VS Code
 
-| Token | Color | Uso |
-|---|---|---|
-| `--aws-ink` | ![#161D26](https://img.shields.io/badge/-%23161D26-161D26?style=flat-square) | Fondos oscuros, header, footer |
-| `--px-orange` | ![#FF9900](https://img.shields.io/badge/-%23FF9900-FF9900?style=flat-square) | Acento principal y CTAs |
-| `--px-purple` | ![#AD5CFF](https://img.shields.io/badge/-%23AD5CFF-AD5CFF?style=flat-square) | Píxeles y tonos |
-| `--px-pink` | ![#FF57E9](https://img.shields.io/badge/-%23FF57E9-FF57E9?style=flat-square) | Sección de lanzamiento, píxeles |
-| `--px-green` | ![#00E582](https://img.shields.io/badge/-%2300E582-00E582?style=flat-square) | Cifras, registro, píxeles |
-| `--px-blue` | ![#42B4FF](https://img.shields.io/badge/-%2342B4FF-42B4FF?style=flat-square) | Píxeles y tonos |
-| `--navy-900` | ![#0B1B33](https://img.shields.io/badge/-%230B1B33-0B1B33?style=flat-square) | Sección "Cómo funciona", agenda |
-
-- **Tipografías:** *Space Grotesk* (títulos) + *Inter* (texto), cargadas desde Google Fonts.
-- **Escala tipográfica:** modular 1.25 y fluida con `clamp()`.
-- **Espaciado:** ritmo de 4/8 px expresado en `rem`.
-- **Radios con propósito:** 2 px en etiquetas, 6 px en botones y avatares, 12 px en tarjetas y header.
-- **Contraste:** los colores neón se usan como relleno o sobre fondos oscuros. Sobre fondos claros hay versiones `*-ink` más oscuras que cumplen WCAG AA.
+> El sitio usa ES modules, que el navegador bloquea en `file://`. Abrir `index.html` con doble clic **no** carga el JavaScript, así que siempre hay que servirlo por HTTP.
 
 ---
 
-## 🗂️ Scaffolding (estructura del proyecto)
-
-```
-awsbg-web/
-├── index.html                  # Landing (página principal)
-├── lanzamiento.html            # Página del evento
-├── 404.html                    # GitHub Pages la usa automáticamente
-├── .nojekyll                   # GitHub Pages sirve los archivos tal cual
-├── .editorconfig               # Formato consistente en cualquier editor
-│
-└── assets/
-    ├── css/
-    │   ├── main.css            # ⭐ ÚNICO punto de entrada: importa todo en orden
-    │   ├── settings/
-    │   │   └── tokens.css      # Variables: colores, tipografía, espaciado, tiempos
-    │   ├── base/
-    │   │   ├── base.css        # Reset, tipografía base, foco accesible
-    │   │   └── layout.css      # Contenedor, secciones, encabezados de sección
-    │   ├── components/         # Un archivo por bloque de UI
-    │   │   ├── header.css      buttons.css   hero.css     pillars.css
-    │   │   ├── process.css     stats.css     checklist.css benefits.css
-    │   │   ├── team.css        ticket.css    join.css     footer.css
-    │   │   └── lang-toggle.css snake.css  dialog.css
-    │   ├── pages/
-    │   │   ├── launch.css      # Exclusivo de lanzamiento.html
-    │   │   └── 404.css
-    │   ├── themes/
-    │   │   └── themes.css      # Temas por sección, paleta AWS, patrones, mosaicos
-    │   └── motion/
-    │       └── motion.css      # Animaciones (siempre al final de la cascada)
-    │
-    ├── js/
-    │   ├── main.js             # ⭐ Punto de entrada: inicializa los módulos en orden
-    │   ├── modules/            # Un módulo = una responsabilidad
-    │   │   ├── nav.js          # Header flotante, menú móvil, scroll-spy, píldora
-    │   │   ├── theme.js        # Modo claro/oscuro
-    │   │   ├── i18n.js         # Traducción ES ⇄ EN
-    │   │   ├── motion.js       # Títulos por palabras, efectos de puntero, confeti
-    │   │   ├── reveal.js       # Aparición al hacer scroll + contadores
-    │   │   ├── pixels.js       # Mosaicos de píxeles + píxeles del hero
-    │   │   ├── snake.js        # La serpiente 🐍
-    │   │   ├── dialog.js       # Ventana modal compartida (<dialog>)
-    │   │   ├── qr-zoom.js      # Ampliar los códigos QR
-    │   │   └── launch.js       # Cuenta regresiva + menú de calendario (Google, Outlook, .ics)
-    │   ├── data/
-    │   │   └── mosaics.js      # Dibujos de píxeles (sprites)
-    │   └── i18n/
-    │       └── en.js           # Diccionario de inglés
-    │
-    └── img/
-        ├── brand/              # Logo oficial, favicon, apple-touch-icon, og-image
-        ├── icons/sprite.svg    # Todos los íconos en un sprite SVG
-        ├── qr/                 # Códigos QR (Builder ID, Meetup)
-        ├── team/               # Fotos del equipo optimizadas (4:5, .webp)
-        └── speakers/           # Fotos de conferencistas
-```
-
-**Reglas del juego**
-
-1. **Cada página HTML vive en la raíz** (`/nueva-pagina.html`), y todos los recursos van en `assets/`.
-2. **Rutas siempre relativas** (`assets/...`), para que funcionen igual en local y en GitHub Pages.
-3. **CSS:** el orden de la cascada lo define `main.css`. Nunca enlaces otro CSS desde el HTML.
-4. **JS:** los módulos solo exportan una función `initX()` y `main.js` decide el orden.
-5. **Datos fuera del código:** los sprites están en `data/` y las traducciones en `i18n/`.
-6. **Mobile-first:** estilos base para móvil y `@media (min-width: …)` para crecer.
-
----
-
-## 💻 Correr el proyecto en local
-
-> Los ES modules requieren un servidor. Abrir el HTML con doble clic (`file://`) no carga el JavaScript.
+## Ejecución local
 
 ```bash
-npx serve .
+git clone https://github.com/AWS-Student-Builder-Group-Escuela/awsbg-web.git
+cd awsbg-web
+
+# Opción A — Node.js
+npx serve .            # http://localhost:3000
+
+# Opción B — Python
+python -m http.server 3000
 ```
 
-Abre **http://localhost:3000**. También sirve la extensión *Live Server* de VS Code, o
-`python -m http.server 3000`.
+| Ruta | Página |
+|---|---|
+| `/` | Landing (`index.html`) |
+| `/lanzamiento.html` | Evento de lanzamiento |
+| `/404.html` | Página de error (GitHub Pages la sirve automáticamente) |
 
-> 💡 **¿No ves las animaciones?** Revisa si tu sistema tiene "reducir movimiento" activado. En Windows:
-> *Configuración → Accesibilidad → Efectos visuales → Efectos de animación*.
-> El sitio respeta esa preferencia a propósito y se muestra estático.
+`serve` reescribe `/lanzamiento.html` a `/lanzamiento` (*clean URLs*). Las dos rutas funcionan y GitHub Pages acepta ambas.
 
----
-
-## 🛠️ Guías rápidas de mantenimiento
-
-<details>
-<summary><b>👥 Poner los datos y fotos del equipo</b></summary>
-
-1. Guarda la foto en `assets/img/team/rol.webp`, en proporción 4:5 y unos 480×600 px. Optimízala: las actuales pesan ~20 KB en WebP frente a ~600 KB en PNG.
-2. En `index.html#equipo`, cambia `<span class="avatar__initials">01</span>` por:
-   ```html
-   <img src="assets/img/team/nombre-apellido.webp" alt="" width="400" height="500" loading="lazy">
-   ```
-3. Reemplaza "Nombre Apellido", el programa académico y los enlaces de LinkedIn/GitHub.
-4. Si quieres que se vea en inglés, agrega el texto nuevo a `assets/js/i18n/en.js`.
-</details>
-
-<details>
-<summary><b>🌐 Agregar o cambiar un texto traducido</b></summary>
-
-El español vive en el HTML. El inglés vive en `assets/js/i18n/en.js` como
-`'texto en español': 'English text'`.
-
-- Si **cambias un texto en el HTML**, cambia también la clave en `en.js`. Si no, ese texto quedará en español al pasar a inglés.
-- Los textos sin traducción (como los nombres propios) simplemente se quedan igual.
-</details>
-
-<details>
-<summary><b>🎨 Cambiar el fondo o el color de una sección</b></summary>
-
-- **Fondo de la sección:** agrega una clase a la `<section>`: `theme-ink`, `theme-navy`, `theme-green`, `theme-pink` o `theme-orange`. Sin clase, el fondo es claro.
-- **Cuadrícula estilo AWS:** agrega `pattern-grid`.
-- **Color de un elemento** (pilar, paso, beneficio, miembro, charla…): usa `data-tone="orange|purple|pink|green|blue"`.
-
-Los botones, líneas y tarjetas se adaptan solos al tema.
-</details>
-
-<details>
-<summary><b>🧩 Agregar un sprite de píxeles</b></summary>
-
-1. Dibuja el sprite en `assets/js/data/mosaics.js` con letras: `o` naranja, `p` morado, `k` rosado, `g` verde, `b` azul, `i` tinta, `w` blanco y `.` vacío.
-2. Colócalo en el HTML:
-   ```html
-   <div class="mosaic mosaic--tr" data-mosaic="heart" aria-hidden="true"></div>
-   ```
-   - Posiciones: `tr`, `tl`, `br`, `bl`.
-   - Tamaño pequeño: `mosaic--sm`. Que flote: `mosaic--float`.
-   - Color de acento para sprites con `x`: `data-color="g"`.
-</details>
-
-<details>
-<summary><b>📄 Crear una página nueva</b></summary>
-
-1. Copia `lanzamiento.html` como base, con el mismo `<head>`, header y footer.
-2. Si necesita estilos propios, crea `assets/css/pages/mi-pagina.css` e impórtalo en `main.css`.
-3. Agrega el enlace en el `<nav>` de **todas** las páginas.
-</details>
-
-<details>
-<summary><b>📅 Cambiar los datos del evento</b></summary>
-
-- Los textos visibles están en `index.html` (ticket) y en `lanzamiento.html`.
-- La fecha, el lugar y la descripción del calendario `.ics` y de la cuenta regresiva están en `assets/js/modules/launch.js`, dentro del objeto `EVENT`.
-</details>
+**Animaciones en local:** si el sistema operativo tiene activado *reducir movimiento*, el sitio se muestra estático a propósito (`prefers-reduced-motion`). En Windows se controla en *Configuración → Accesibilidad → Efectos visuales → Efectos de animación*.
 
 ---
 
-## ♿ Accesibilidad y rendimiento
+## Estructura del proyecto
 
-- HTML semántico (`header`, `nav`, `main`, `section`, `footer`) y enlace "Saltar al contenido".
-- Navegación completa con teclado, con foco visible de 3 px.
-- Contraste **WCAG AA** verificado con *axe-core* en modo claro y oscuro, en español y en inglés.
-- `prefers-reduced-motion`: todo queda estático y legible, sin serpiente ni píxeles animados.
-- La serpiente, los píxeles y la cinta animada son decorativos (`aria-hidden`), y la serpiente se puede pausar.
-- Animaciones solo con `transform` y `opacity`. Los efectos que siguen el mouse solo se activan en dispositivos con mouse.
-- Cero dependencias de JavaScript; las imágenes llevan `loading="lazy"`.
+```
+.
+├── index.html                 # Landing
+├── lanzamiento.html           # Página del evento
+├── 404.html                   # Error 404 (sin JS)
+├── .nojekyll                  # Desactiva Jekyll en GitHub Pages
+├── .editorconfig              # UTF-8, LF, 2 espacios
+└── assets/
+    ├── css/
+    │   ├── main.css           # Entry point: @import en orden de cascada
+    │   ├── settings/          # tokens.css — custom properties (diseño, tema claro/oscuro)
+    │   ├── base/              # base.css (reset, tipografía, foco) · layout.css
+    │   ├── components/        # Un archivo por componente de UI
+    │   ├── pages/             # Estilos exclusivos de una página (launch.css, 404.css)
+    │   ├── themes/            # themes.css — temas por sección, paleta, mosaicos
+    │   └── motion/            # motion.css — animaciones (último en la cascada)
+    ├── js/
+    │   ├── main.js            # Entry point: importa e inicializa módulos
+    │   ├── modules/           # Un módulo por responsabilidad (ver Arquitectura)
+    │   ├── data/              # mosaics.js — sprites de píxeles
+    │   └── i18n/              # en.js — diccionario de inglés
+    └── img/
+        ├── brand/             # Logo, favicon, apple-touch-icon, og-image (1200×630)
+        ├── icons/sprite.svg   # Sprite SVG de íconos (<symbol id="i-*">)
+        ├── qr/                # Códigos QR
+        ├── team/              # Fotos del equipo (WebP 480×600)
+        └── speakers/          # Fotos de conferencistas (WebP 240×240)
+```
 
----
-
-## 🌍 Despliegue
-
-El sitio se publica con **GitHub Pages** desde la rama `main`:
-
-1. *Settings → Pages → Source: Deploy from a branch*
-2. Rama `main`, carpeta `/ (root)`
-3. Cada push a `main` actualiza el sitio en unos minutos.
-
-🔗 **https://aws-student-builder-group-escuela.github.io/awsbg-web/**
-
-> Las presentaciones (`*.pptx`), `CLAUDE.md` y `.claude/` están en `.gitignore` y no se publican.
-
----
-
-## 📝 Pendientes de contenido
-
-Busca `TODO` en el HTML.
-
-- [x] Fotos, nombres, roles y programas del equipo (AWS SBG Leader + 5 leads)
-- [ ] Enlaces de **LinkedIn/GitHub** del equipo (opcional, en `.member__links`)
-- [x] Fotos de los conferencistas
-- [x] Link del evento en **Meetup**
-- [x] Salón confirmado: **A-301**
+Todas las rutas son **relativas** (`assets/...`), así que el sitio funciona igual en `localhost`, en la subruta `/awsbg-web/` de GitHub Pages o con un dominio propio.
 
 ---
 
-<div align="center">
+## Arquitectura
 
-Hecho con 🩷 por estudiantes de la **Escuela Colombiana de Ingeniería Julio Garavito**
+### CSS
 
-<sub>AWS es una marca de Amazon.com, Inc. o sus afiliadas. Este es un sitio de una comunidad estudiantil.</sub>
+`assets/css/main.css` es la única hoja enlazada desde el HTML. Importa los parciales en este orden, y el orden define la cascada:
 
-🟧🟪🟥🟩🟦
+```
+settings → base → components → pages → themes → motion
+```
 
-</div>
+| Capa | Responsabilidad |
+|---|---|
+| `settings/tokens.css` | Solo `:root`: color semántico (`--c-*`), escala tipográfica fluida (`--fs-*`, ratio 1.25 con `clamp()`), espaciado (`--sp-*`), radios, *easing* y duraciones. Define el modo oscuro con `prefers-color-scheme` y `[data-theme]`. |
+| `base/` | Reset, tipografía base, `:focus-visible`, `.visually-hidden`, `.skip-link`, contenedor y ritmo de secciones. |
+| `components/` | Un archivo por bloque (header, hero, team, ticket, dialog…), con convención BEM (`.bloque__elemento--modificador`) y escrito *mobile-first*. |
+| `pages/` | Reglas que solo aplican a una página. |
+| `themes/` | Paleta AWS, temas de sección, `data-tone`, patrones y mosaicos. |
+| `motion/` | Keyframes y transiciones. Solo anima `transform`, `opacity` y `clip-path`, y todo tiene su alternativa bajo `prefers-reduced-motion`. |
+
+Para agregar un componente, crea `components/<nombre>.css` y añade su `@import` en `main.css`.
+
+### JavaScript
+
+`assets/js/main.js` se carga con `<script type="module">`. Cada módulo exporta una función `initX()` sin efectos al importarse, y el orden de inicialización importa:
+
+| # | Módulo | Responsabilidad |
+|---|---|---|
+| 1 | `pixels.js` | Renderiza mosaicos SVG desde `data/mosaics.js` y el campo de píxeles del hero. |
+| 2 | `motion.js` | Divide títulos en palabras (`splitWords`/`unsplitWords`), efectos de puntero, barra de progreso y `confetti()`. |
+| 3 | `i18n.js` | Traduce el DOM. Debe ir **después** de `motion`, porque vuelve a dividir los títulos ya divididos. |
+| 4 | `theme.js` | Alterna modo claro/oscuro. |
+| 5 | `nav.js` | Header (compacto, oculto al bajar), menú móvil, *scroll-spy* e indicador del enlace activo. |
+| 6 | `reveal.js` | `IntersectionObserver` sobre `[data-reveal]` y contadores `[data-count]`. Va **después** de `pixels`, `motion` e `i18n`, que crean nuevos `[data-reveal]`. |
+| 7 | `launch.js` | Cuenta regresiva y menú "Agregar al calendario" (Google Calendar, Outlook, `.ics`). El objeto `EVENT` es la única fuente de los datos del evento. |
+| 8 | `snake.js` | Serpiente en `<canvas>` fijo que recorre los márgenes laterales. |
+| 9 | `qr-zoom.js` | Abre los QR en grande. |
+| — | `dialog.js` | Utilidad compartida (no se inicializa): `createDialog()` sobre `<dialog>` nativo, con foco atrapado, Esc, clic en el fondo y cierre animado. |
+
+Los módulos se comunican con el evento global `langchange` (`document.dispatchEvent`), que se emite al cambiar de idioma.
+
+### Internacionalización (ES/EN)
+
+- **Fuente:** el español está escrito en el HTML. Es el idioma por defecto, sirve para SEO y funciona sin JS.
+- **Traducción:** `assets/js/i18n/en.js` exporta un objeto `{ 'texto en español': 'English text' }`.
+- **Mecanismo:**
+  - Un `TreeWalker` recorre los nodos de texto del `<body>` y busca cada texto (normalizado) en el diccionario.
+  - También traduce `aria-label`, `alt`, `title`, `document.title` y los meta `description`/`og:*`.
+  - Guarda el original de cada nodo en un `WeakMap`, así que volver a español restaura el contenido exacto.
+- **Textos generados por JS:** usan `t('texto en español')`. Los elementos marcados con `data-i18n-dynamic` no se traducen automáticamente porque sus etiquetas las maneja su propio módulo.
+- **Sin parpadeo:** un script inline en `<head>` aplica la clase `i18n-pending` antes de pintar si el idioma no es español. `i18n.js` la retira al terminar, y si el JS falla, una animación de respaldo la retira a los 1.2 s.
+- **Idioma inicial:** el valor guardado en `localStorage`; si no hay, el idioma del navegador (`es*` → español, cualquier otro → inglés).
+
+Si cambias un texto en el HTML, actualiza su clave en `en.js`. Si no la encuentra, ese texto se queda en español.
+
+### Temas y paleta
+
+Paleta de la comunidad AWS, definida en `themes/themes.css`:
+
+| Token | Valor | Variante de texto (AA sobre claro) |
+|---|---|---|
+| `--aws-ink` | `#161D26` | — |
+| `--px-orange` | `#FF9900` | `--px-orange-ink` `#A85600` |
+| `--px-purple` | `#AD5CFF` | `--px-purple-ink` `#7B35D9` |
+| `--px-pink` | `#FF57E9` | `--px-pink-ink` `#B5179E` |
+| `--px-green` | `#00E582` | `--px-green-ink` `#007A45` |
+| `--px-blue` | `#42B4FF` | `--px-blue-ink` `#0A6CC2` |
+
+Las clases de tema (`theme-ink`, `theme-navy`, `theme-green`, `theme-pink`, `theme-orange`) **redefinen los tokens semánticos** (`--c-bg`, `--c-text`, `--c-line`…) dentro de la sección. Por eso los componentes no necesitan variantes por fondo.
+
+### API de atributos `data-*`
+
+| Atributo | Elemento | Efecto |
+|---|---|---|
+| `data-reveal` · `="left\|right\|scale"` | cualquiera | Aparece al entrar en pantalla |
+| `data-reveal-group` | contenedor | Escalona (*stagger*) a sus hijos `[data-reveal]` |
+| `data-count="N"` | texto | Contador animado hasta N |
+| `data-hero` + `style="--d:ms"` | hero | Entrada al cargar con retraso `--d` |
+| `data-tone="orange\|purple\|pink\|green\|blue"` | ítem | Define `--tone` / `--tone-ink` |
+| `data-tilt="N"` | tarjeta | Inclinación 3D de N grados con el puntero |
+| `data-magnetic` | botón | Efecto magnético |
+| `data-mosaic="nombre"` (`data-color`) | `div.mosaic` | Sprite de `data/mosaics.js` (`x` = color de acento) |
+| `data-pixel-field` | sección | Píxeles que titilan sobre la cuadrícula |
+| `data-add-calendar` | botón | Abre el menú de calendario |
+| `data-qr-zoom` | botón con `<img>` | Abre el QR ampliado |
+| `data-countdown` | contenedor | Cuenta regresiva (`[data-unit="d\|h\|m\|s"]`) |
+
+Clases de mosaico: posición `mosaic--tr|tl|br|bl`, tamaño `mosaic--sm` y animación `mosaic--float`.
+
+### Persistencia en el navegador
+
+Todo acceso a `localStorage` está protegido con `try/catch`, así que el sitio funciona aunque el almacenamiento esté bloqueado.
+
+| Clave | Valores |
+|---|---|
+| `awssbg-theme` | `light` \| `dark` |
+| `awssbg-lang` | `es` \| `en` |
+| `awssbg-snake` | `on` \| `off` |
+
+---
+
+## Desarrollo
+
+**Nueva página**
+1. Crea `nombre.html` en la raíz, con el mismo `<head>` (script inline de tema e idioma, `main.css`, `main.js`), header y footer.
+2. Si necesita estilos propios, crea `assets/css/pages/nombre.css` e impórtalo en `main.css`.
+3. Agrega el enlace al `<nav>` de todas las páginas y sus textos a `en.js`.
+
+**Nuevo módulo JS**
+1. Crea `assets/js/modules/nombre.js` y exporta `initNombre()`.
+2. Impórtalo en `main.js` y llámalo respetando las dependencias de la tabla de arriba.
+3. Los textos visibles generados por el módulo deben pasar por `t()`.
+
+**Imágenes**
+- Formato WebP; las fotos del equipo en 4:5 (480×600) y las de conferencistas en 1:1 (240×240).
+- Usa `width`/`height` explícitos y `loading="lazy"`.
+- Las fotos originales sin optimizar (`*.png`/`*.jpg` en `team/` y `speakers/`) están en `.gitignore`.
+
+**Íconos**
+- Añade un `<symbol id="i-nombre" viewBox="0 0 24 24">` a `img/icons/sprite.svg`.
+- Úsalo con `<svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-nombre"/></svg>`.
+
+**Verificación sugerida antes de un push**
+- Sin errores en la consola, en `/` y en `/lanzamiento.html`.
+- Revisar en 375, 768 y 1440 px, en claro y oscuro, y en ES y EN.
+- Auditoría de accesibilidad (por ejemplo, axe DevTools o Lighthouse) sin violaciones WCAG 2 AA.
+
+---
+
+## Accesibilidad y rendimiento
+
+- HTML semántico, enlace "Saltar al contenido" y navegación completa por teclado con `:focus-visible` de 3 px.
+- Contraste WCAG 2 AA verificado con axe-core en claro/oscuro y ES/EN.
+- Las ventanas modales usan `<dialog>` nativo: foco atrapado, Esc y devolución del foco al botón que la abrió.
+- Contenido decorativo (serpiente, píxeles, cinta, mosaicos) con `aria-hidden`. La serpiente se puede pausar.
+- Con `prefers-reduced-motion` se desactivan las animaciones, la serpiente y el campo de píxeles.
+- Los efectos de puntero solo se activan con `(hover: hover) and (pointer: fine)`.
+- Sin JS de terceros. Imágenes en WebP con `lazy` y dimensiones explícitas.
+- La serpiente y el campo de píxeles se pausan con la pestaña oculta o cuando salen de pantalla.
+
+---
+
+## Compatibilidad
+
+Navegadores *evergreen* recientes (Chrome/Edge, Firefox, Safari). Funciones que requieren:
+
+| Función | Requisito | Si no está disponible |
+|---|---|---|
+| Interacciones | JavaScript habilitado (ES modules) | Sin JS: todo el contenido visible y estático |
+| Ventanas modales | `<dialog>` | El calendario descarga el `.ics` directamente |
+| Transición entre páginas | View Transitions (`@view-transition`) | Navegación normal |
+| Logo del header | `:has()` | Sin fondo de respaldo |
+| Foco de luz por tono | `color-mix()` | Sin foco de color |
+
+---
+
+## Despliegue
+
+GitHub Pages, desde la rama `main` y la raíz del repo:
+
+1. *Settings → Pages → Build and deployment → Source: Deploy from a branch*
+2. *Branch:* `main`, carpeta `/ (root)`
+
+Cada push a `main` publica una nueva versión en 1–2 minutos. `.nojekyll` asegura que los archivos se sirvan sin procesar.
+
+La imagen para redes (`og:image`) usa una URL absoluta al dominio de producción. Si cambia el dominio, actualiza ese meta en `index.html` y `lanzamiento.html`.
+
+---
+
+## Convenciones
+
+- **Commits:** [Conventional Commits](https://www.conventionalcommits.org/) en español (`feat(css): …`, `fix(i18n): …`, `docs: …`).
+- **CSS:** BEM, *mobile-first* con `@media (min-width: …)`, unidades fluidas (`rem`, `%`, `clamp()`) y sin anchos fijos.
+- **JS:** módulos ES con un `initX()` por responsabilidad, sin estado global salvo el evento `langchange`.
+- **Formato:** definido en `.editorconfig`.
+
+---
+
+<sub>Sitio de una comunidad estudiantil. AWS es una marca de Amazon.com, Inc. o sus afiliadas.</sub>
