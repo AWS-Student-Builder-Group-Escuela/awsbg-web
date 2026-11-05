@@ -58,3 +58,4 @@
 .agenda time, .agenda__slot { font-family: var(--font-mono); font-size: var(--fs--1); color: var(--c-text-muted); padding-top: 0.2rem; }
 .agenda strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
 .agenda span { color: var(--c-text-muted); font-size: var(--fs--1); }
+.countdown-done { margin-top: var(--sp-6); }
