@@ -1,7 +1,9 @@
 # AWS Student Builder Group · ECI — Sitio web
 
 Sitio estático del AWS Student Builder Group de la Escuela Colombiana de Ingeniería Julio Garavito.
-Está construido con HTML, CSS y JavaScript nativos, sin frameworks, dependencias ni proceso de build, y se publica con GitHub Pages.
+Está construido con HTML, CSS y JavaScript nativos, sin frameworks, dependencias de runtime ni proceso de build. Se verifica y publica en GitHub Pages con un pipeline de GitHub Actions.
+
+[![CI/CD · GitHub Pages](https://github.com/AWS-Student-Builder-Group-Escuela/awsbg-web/actions/workflows/deploy.yml/badge.svg)](https://github.com/AWS-Student-Builder-Group-Escuela/awsbg-web/actions/workflows/deploy.yml)
 
 **Producción:** https://aws-student-builder-group-escuela.github.io/awsbg-web/
 
@@ -21,6 +23,7 @@ Está construido con HTML, CSS y JavaScript nativos, sin frameworks, dependencia
   - [API de atributos `data-*`](#api-de-atributos-data-)
   - [Persistencia en el navegador](#persistencia-en-el-navegador)
 - [Desarrollo](#desarrollo)
+- [CI/CD](#cicd)
 - [Accesibilidad y rendimiento](#accesibilidad-y-rendimiento)
 - [Compatibilidad](#compatibilidad)
 - [Despliegue](#despliegue)
@@ -36,19 +39,18 @@ Está construido con HTML, CSS y JavaScript nativos, sin frameworks, dependencia
 | Estilos | CSS3 modular (custom properties, `@import`, `clamp()`, `color-mix()`, `:has()`) |
 | Lógica | JavaScript ES2020+ como **ES modules nativos** (sin bundler) |
 | Tipografías | Space Grotesk + Inter (Google Fonts) |
-| Hosting | GitHub Pages (rama `main`, raíz del repo) |
+| Hosting | GitHub Pages, desplegado con GitHub Actions |
+| Calidad (solo dev/CI) | html-validate, axe-core, puppeteer-core |
 
-No hay `package.json` ni dependencias de runtime. Node.js solo hace falta si quieres usar `npx serve` como servidor local.
+El `package.json` solo declara **herramientas de desarrollo y CI** (validación y auditoría). El sitio publicado no carga ninguna dependencia.
 
 ---
 
 ## Requisitos
 
 - Un navegador moderno (ver [Compatibilidad](#compatibilidad)).
-- Un servidor HTTP estático para desarrollo. Cualquiera de estos:
-  - Node.js 18+ (`npx serve`)
-  - Python 3 (`python -m http.server`)
-  - La extensión *Live Server* de VS Code
+- **Node.js 20+** para el servidor local y las verificaciones. Como alternativa, cualquier servidor estático (Python 3, *Live Server*…).
+- **Google Chrome** instalado, solo para `npm run test:a11y`. Usa `CHROME_PATH` si no está en la ruta por defecto.
 
 > El sitio usa ES modules, que el navegador bloquea en `file://`. Abrir `index.html` con doble clic **no** carga el JavaScript, así que siempre hay que servirlo por HTTP.
 
@@ -59,21 +61,25 @@ No hay `package.json` ni dependencias de runtime. Node.js solo hace falta si qui
 ```bash
 git clone https://github.com/AWS-Student-Builder-Group-Escuela/awsbg-web.git
 cd awsbg-web
+npm ci                 # instala las herramientas de verificación
 
-# Opción A — Node.js
-npx serve .            # http://localhost:3000
-
-# Opción B — Python
-python -m http.server 3000
+npm start              # http://localhost:3000  (scripts/serve.mjs, sin dependencias)
+# alternativa sin Node: python -m http.server 3000
 ```
+
+| Script | Qué hace |
+|---|---|
+| `npm start` | Servidor estático local que imita a GitHub Pages (`/` → `index.html`, rutas desconocidas → `404.html`). Puerto configurable con `PORT`. |
+| `npm run test:html` | Valida el HTML con html-validate (`.htmlvalidate.json`). |
+| `npm run test:links` | Verifica offline que no haya referencias internas rotas. |
+| `npm run test:a11y` | Auditoría axe-core (WCAG 2 A/AA) y errores de runtime en Chrome. |
+| `npm test` | Las tres verificaciones, en ese orden. |
 
 | Ruta | Página |
 |---|---|
 | `/` | Landing (`index.html`) |
 | `/lanzamiento.html` | Evento de lanzamiento |
 | `/404.html` | Página de error (GitHub Pages la sirve automáticamente) |
-
-`serve` reescribe `/lanzamiento.html` a `/lanzamiento` (*clean URLs*). Las dos rutas funcionan y GitHub Pages acepta ambas.
 
 **Animaciones en local:** si el sistema operativo tiene activado *reducir movimiento*, el sitio se muestra estático a propósito (`prefers-reduced-motion`). En Windows se controla en *Configuración → Accesibilidad → Efectos visuales → Efectos de animación*.
 
@@ -86,7 +92,15 @@ python -m http.server 3000
 ├── index.html                 # Landing
 ├── lanzamiento.html           # Página del evento
 ├── 404.html                   # Error 404 (sin JS)
-├── .nojekyll                  # Desactiva Jekyll en GitHub Pages
+├── .github/workflows/
+│   └── deploy.yml             # Pipeline CI/CD (verificar → desplegar)
+├── scripts/                   # Herramientas de dev/CI (Node, sin dependencias de runtime)
+│   ├── serve.mjs              # Servidor estático local
+│   ├── check-links.mjs        # Verificación offline de referencias
+│   └── a11y.mjs               # Auditoría axe-core en Chrome
+├── package.json               # Scripts y devDependencies de verificación
+├── .htmlvalidate.json         # Reglas de html-validate
+├── .nojekyll                  # Desactiva Jekyll si se publica desde una rama
 ├── .editorconfig              # UTF-8, LF, 2 espacios
 └── assets/
     ├── css/
@@ -235,10 +249,32 @@ Todo acceso a `localStorage` está protegido con `try/catch`, así que el sitio 
 - Añade un `<symbol id="i-nombre" viewBox="0 0 24 24">` a `img/icons/sprite.svg`.
 - Úsalo con `<svg class="icon" aria-hidden="true"><use href="assets/img/icons/sprite.svg#i-nombre"/></svg>`.
 
-**Verificación sugerida antes de un push**
-- Sin errores en la consola, en `/` y en `/lanzamiento.html`.
-- Revisar en 375, 768 y 1440 px, en claro y oscuro, y en ES y EN.
-- Auditoría de accesibilidad (por ejemplo, axe DevTools o Lighthouse) sin violaciones WCAG 2 AA.
+**Antes de un push**
+- Ejecuta `npm test`; es lo mismo que corre el pipeline.
+- Revisa visualmente en 375, 768 y 1440 px, en claro y oscuro, y en ES y EN.
+
+---
+
+## CI/CD
+
+Pipeline en [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
+
+```
+push / pull_request ─▶ verify ──(solo main, si pasa)──▶ deploy ─▶ GitHub Pages
+```
+
+| Job | Cuándo | Pasos |
+|---|---|---|
+| **verify** | Push a `main`, PR hacia `main` y ejecución manual | `npm ci` → `test:html` → `test:links` → `test:a11y` (Chrome del runner) |
+| **deploy** | Solo push a `main`, y solo si `verify` pasó | Arma `_site/` con `index.html`, `lanzamiento.html`, `404.html` y `assets/` → `upload-pages-artifact` → `deploy-pages` |
+
+- **Qué verifica:**
+  - **HTML:** html-validate con las reglas *recommended*. Se permiten solo los estilos en línea `--d` e `--i`, que usa el sistema de animación.
+  - **Enlaces:** archivos locales, anclas (también entre páginas), íconos del sprite (incluidos los generados desde JS), cadena de `@import` CSS, grafo de `import` JS y nombres de `data-mosaic`.
+  - **Accesibilidad y runtime:** 2 páginas × ES/EN × claro/oscuro, más el menú de calendario abierto. Falla si hay violaciones WCAG 2 A/AA, errores de JS o de consola, o respuestas 4xx/5xx.
+- **Qué se publica:** solo el sitio. README, scripts, `package.json` y la configuración del repo no llegan a producción.
+- **Concurrencia:** un PR nuevo cancela su ejecución anterior; los despliegues de `main` nunca se cancelan a medias.
+- **Permisos:** mínimos (`contents: read`). Solo el job de despliegue recibe `pages: write` e `id-token: write`.
 
 ---
 
@@ -271,12 +307,13 @@ Navegadores *evergreen* recientes (Chrome/Edge, Firefox, Safari). Funciones que 
 
 ## Despliegue
 
-GitHub Pages, desde la rama `main` y la raíz del repo:
+Configuración única del repositorio:
 
-1. *Settings → Pages → Build and deployment → Source: Deploy from a branch*
-2. *Branch:* `main`, carpeta `/ (root)`
+1. *Settings → Pages → Build and deployment → Source:* **GitHub Actions**
 
-Cada push a `main` publica una nueva versión en 1–2 minutos. `.nojekyll` asegura que los archivos se sirvan sin procesar.
+A partir de ahí, cada push a `main` corre el pipeline y, si pasa, publica en 1–2 minutos. El estado se ve en la pestaña *Actions* y en el entorno `github-pages`.
+
+Para volver a desplegar sin cambios: *Actions → CI/CD · GitHub Pages → Run workflow*.
 
 La imagen para redes (`og:image`) usa una URL absoluta al dominio de producción. Si cambia el dominio, actualiza ese meta en `index.html` y `lanzamiento.html`.
 
@@ -288,6 +325,7 @@ La imagen para redes (`og:image`) usa una URL absoluta al dominio de producción
 - **CSS:** BEM, *mobile-first* con `@media (min-width: …)`, unidades fluidas (`rem`, `%`, `clamp()`) y sin anchos fijos.
 - **JS:** módulos ES con un `initX()` por responsabilidad, sin estado global salvo el evento `langchange`.
 - **Formato:** definido en `.editorconfig`.
+- **Ramas:** trabaja en una rama y abre un PR hacia `main`; el pipeline la verifica antes de mezclar.
 
 ---
 
