@@ -1,0 +1,24 @@
+/* checklist.css — Eligibility — split text + checklist */
+
+/* ==========================================================================
+   Eligibility — split text + checklist
+   ========================================================================== */
+.split { display: grid; gap: var(--sp-7); }
+@media (min-width: 64em) { .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--sp-8); align-items: start; } }
+.split__title h2 { max-width: 12ch; }
+.split__title p { margin-top: var(--sp-5); color: var(--c-text-muted); max-width: 38ch; font-size: var(--fs-1); }
+
+.checklist { border-top: 1px solid var(--c-line-strong); }
+.checklist li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--sp-4);
+  align-items: start;
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--c-line);
+  transition: padding-left var(--dur-2) var(--ease-out);
+}
+.checklist li:hover { padding-left: var(--sp-2); }
+.checklist .icon { width: 1.5rem; height: 1.5rem; color: var(--c-accent-text); margin-top: 0.15rem; }
+.checklist strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
+.checklist span { color: var(--c-text-muted); }

@@ -1,0 +1,63 @@
+/* ticket.css — Launch ticket */
+
+/* ==========================================================================
+   Launch ticket
+   ========================================================================== */
+.ticket {
+  position: relative;
+  display: grid;
+  border: 1.5px solid var(--c-line-strong);
+  border-radius: var(--radius-l);
+  background: var(--c-surface);
+  overflow: hidden;
+}
+.ticket__date {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--c-accent);
+  color: var(--c-on-accent);
+}
+.ticket__day, .ticket__month { display: block; }
+.ticket__day { font-family: var(--font-display); font-weight: 700; font-size: clamp(5rem, 3rem + 10vw, 9rem); line-height: 0.8; letter-spacing: -0.06em; }
+.ticket__month { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2); text-transform: uppercase; letter-spacing: 0.04em; }
+.ticket__weekday { font-family: var(--font-mono); font-size: var(--fs--1); text-transform: uppercase; letter-spacing: 0.1em; }
+.ticket__body { padding: var(--sp-6) var(--sp-5); display: grid; gap: var(--sp-5); }
+.ticket__body h2 { font-size: var(--fs-3); max-width: 18ch; }
+.ticket__facts { display: grid; gap: var(--sp-3); }
+.ticket__facts li { display: flex; align-items: center; gap: var(--sp-3); color: var(--c-text-muted); }
+.ticket__facts .icon { color: var(--c-text); }
+.ticket__talks { display: grid; gap: var(--sp-4); border-top: 1px dashed var(--c-line); padding-top: var(--sp-5); }
+.ticket__talks li span { display: block; font-family: var(--font-mono); font-size: var(--fs--2); text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-accent-text); }
+.ticket__talks li strong { font-family: var(--font-display); font-size: var(--fs-1); }
+
+@media (min-width: 48em) {
+  .ticket { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+  .ticket__date { padding: var(--sp-7) var(--sp-6); }
+  /* perforation */
+  .ticket__date::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; right: -1px;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--c-surface) 0 8px, transparent 8px 16px);
+  }
+  .ticket__body { padding: var(--sp-7) var(--sp-6); }
+  .ticket__talks { grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+}
+
+/* Speaker thumbnails in the ticket */
+.ticket__talks li { display: flex; align-items: center; gap: var(--sp-3); }
+.ticket__speaker {
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  border: 1.5px solid var(--c-line-strong);
+}
+.ticket__speaker img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease-spring, ease); }
+.ticket__talks li:hover .ticket__speaker img { transform: scale(1.12); }

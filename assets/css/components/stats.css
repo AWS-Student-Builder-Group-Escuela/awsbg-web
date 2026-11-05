@@ -1,0 +1,24 @@
+/* stats.css — Stats band */
+
+/* ==========================================================================
+   Stats band
+   ========================================================================== */
+.stats { display: grid; gap: var(--sp-7); }
+.stats__intro h2 { font-size: var(--fs-3); max-width: 16ch; }
+.stats__intro p { margin-top: var(--sp-4); color: var(--c-text-muted); max-width: 40ch; }
+.stats__list { display: grid; gap: var(--sp-6); }
+.stat { padding-top: var(--sp-4); border-top: 1px solid var(--c-line); }
+.stat__value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(4rem, 2.5rem + 8vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.stat__value span { color: var(--c-accent); }
+.stat__label { display: block; margin-top: var(--sp-3); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-1); }
+.stat__desc { margin-top: var(--sp-2); color: var(--c-text-muted); font-size: var(--fs--1); max-width: 32ch; }
+@media (min-width: 48em) { .stats__list { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 64em) { .stats { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--sp-8); align-items: end; } }

@@ -1,0 +1,55 @@
+/* process.css — Process (¿Cómo funciona?) — vertical on mobile, horizontal on desktop */
+
+/* ==========================================================================
+   Process (¿Cómo funciona?) — vertical on mobile, horizontal on desktop
+   ========================================================================== */
+.process { position: relative; display: grid; gap: 0; }
+.process__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  column-gap: var(--sp-4);
+  padding-bottom: var(--sp-6);
+}
+.process__step::before { /* connector line */
+  content: "";
+  position: absolute;
+  left: calc(1.5rem - 0.75px);
+  top: 3rem;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--c-line);
+}
+.process__step:last-child::before { display: none; }
+.process__node {
+  display: grid;
+  place-items: center;
+  width: 3rem; height: 3rem;
+  border: 1.5px solid var(--c-line-strong);
+  border-radius: var(--radius-m);
+  background: var(--c-bg);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--fs--1);
+  transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2), border-color var(--dur-2), transform var(--dur-2) var(--ease-out);
+}
+.section--alt .process__node { background: var(--c-bg-alt); }
+.process__step:hover .process__node {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-on-accent);
+  transform: rotate(-6deg);
+}
+.process__body h3 { font-size: var(--fs-2); margin-bottom: var(--sp-2); padding-top: 0.45rem; }
+.process__body p { color: var(--c-text-muted); max-width: 36ch; }
+
+@media (min-width: 64em) {
+  .process { grid-template-columns: repeat(5, 1fr); gap: var(--sp-5); }
+  .process__step { grid-template-columns: 1fr; row-gap: var(--sp-5); padding-bottom: 0; }
+  .process__step::before {
+    left: 3.5rem; right: calc(var(--sp-5) * -1 + 0.5rem);
+    top: calc(1.5rem - 0.75px); bottom: auto;
+    width: auto; height: 1.5px;
+  }
+  .process__body h3 { padding-top: 0; }
+}

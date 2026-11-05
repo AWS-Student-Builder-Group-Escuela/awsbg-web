@@ -1,0 +1,27 @@
+/* footer.css — Footer */
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  padding-block: var(--sp-8) var(--sp-6);
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-text);
+  --c-text-muted: var(--c-inverse-muted);
+  --c-line: rgb(255 255 255 / 0.14);
+  --c-focus: #7fb0ff;
+}
+.site-footer .brand__mark { background: var(--c-inverse-text); color: var(--c-inverse-bg); }
+.site-footer .brand__text small { color: var(--c-inverse-muted); }
+.footer__top { display: grid; gap: var(--sp-7); padding-bottom: var(--sp-7); border-bottom: 1px solid var(--c-line); }
+.footer__tagline { margin-top: var(--sp-5); font-family: var(--font-display); font-size: var(--fs-2); font-weight: 500; max-width: 18ch; line-height: 1.2; }
+.footer__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+.footer__cols h2 { font-family: var(--font-mono); font-size: var(--fs--2); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-inverse-muted); margin-bottom: var(--sp-4); }
+.footer__cols li + li { margin-top: var(--sp-2); }
+.footer__cols a { text-decoration: none; color: var(--c-inverse-text); }
+.footer__cols a:hover { color: var(--orange-300); text-decoration: underline; }
+.footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-3); padding-top: var(--sp-5); font-size: var(--fs--2); color: var(--c-inverse-muted); }
+@media (min-width: 64em) { .footer__top { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); } .footer__cols { grid-template-columns: repeat(3, 1fr); } }
+
+/* Bigger logo in the footer */
+.site-footer .brand__mark { width: 3.5rem; height: 3.5rem; }

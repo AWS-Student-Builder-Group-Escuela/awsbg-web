@@ -1,0 +1,60 @@
+/* launch.css — Launch page specifics */
+
+/* ==========================================================================
+   Launch page specifics
+   ========================================================================== */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  max-width: 34rem;
+  margin-top: var(--sp-7);
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+.countdown__cell { padding: var(--sp-4) var(--sp-3); background: var(--c-bg); text-align: left; }
+.countdown__num { display: block; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-3); line-height: 1; font-variant-numeric: tabular-nums; }
+.countdown__unit { display: block; margin-top: var(--sp-2); font-family: var(--font-mono); font-size: var(--fs--2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted); }
+.countdown[hidden] { display: none; }
+
+.facts-bar {
+  display: grid;
+  gap: 1px;
+  background: var(--c-line);
+  border-block: 1px solid var(--c-line);
+}
+.facts-bar > div { padding: var(--sp-5) var(--gutter); background: var(--c-bg); display: flex; gap: var(--sp-4); align-items: flex-start; }
+.facts-bar .icon { width: 1.5rem; height: 1.5rem; color: var(--c-accent-text); margin-top: 0.2rem; }
+.facts-bar dt { font-family: var(--font-mono); font-size: var(--fs--2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted); }
+.facts-bar dl { margin: 0; }
+.facts-bar dd { margin: var(--sp-1) 0 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-1); }
+@media (min-width: 48em) { .facts-bar { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 72em) { .facts-bar { grid-template-columns: repeat(4, 1fr); } .facts-bar > div { padding-inline: var(--sp-6); } }
+
+.talks { display: grid; gap: var(--sp-7); }
+.talk { display: grid; gap: var(--sp-5); padding-top: var(--sp-5); border-top: 1.5px solid var(--c-line-strong); }
+.talk__label { font-family: var(--font-mono); font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-accent-text); }
+.talk h3 { font-size: var(--fs-3); max-width: 18ch; }
+.talk p { color: var(--c-text-muted); max-width: 42ch; }
+.speaker { display: flex; align-items: center; gap: var(--sp-4); }
+.speaker .avatar { width: 6rem; aspect-ratio: 1; flex: none; }
+.talk:hover .avatar img { filter: none; transform: scale(1.04); }
+.speaker .avatar__initials { font-size: var(--fs-2); }
+.speaker strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
+.speaker span { color: var(--c-text-muted); font-size: var(--fs--1); }
+.talk:hover .avatar { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--c-accent); }
+@media (min-width: 64em) { .talks { grid-template-columns: 1fr 1fr; gap: var(--sp-8); } }
+
+.agenda { border-top: 1px solid var(--c-line-strong); }
+.agenda li {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--c-line);
+}
+.agenda time, .agenda__slot { font-family: var(--font-mono); font-size: var(--fs--1); color: var(--c-text-muted); padding-top: 0.2rem; }
+.agenda strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
+.agenda span { color: var(--c-text-muted); font-size: var(--fs--1); }

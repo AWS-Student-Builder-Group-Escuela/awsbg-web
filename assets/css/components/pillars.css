@@ -1,0 +1,35 @@
+/* pillars.css — Pillars (¿Qué es?) — numbered columns, no boxes */
+
+/* ==========================================================================
+   Pillars (¿Qué es?) — numbered columns, no boxes
+   ========================================================================== */
+.pillars { display: grid; gap: var(--sp-6); counter-reset: pillar; }
+.pillar {
+  counter-increment: pillar;
+  padding-top: var(--sp-5);
+  border-top: 1.5px solid var(--c-line-strong);
+  position: relative;
+}
+.pillar::before {
+  content: "0" counter(pillar);
+  display: block;
+  margin-bottom: var(--sp-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs--1);
+  color: var(--c-text-muted);
+}
+.pillar::after {
+  content: "";
+  position: absolute;
+  top: -1.5px; left: 0;
+  width: 100%; height: 1.5px;
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.pillar:hover::after { transform: scaleX(1); }
+.pillar__icon { width: 2rem; height: 2rem; margin-bottom: var(--sp-4); color: var(--c-accent-text); }
+.pillar h3 { font-size: var(--fs-3); margin-bottom: var(--sp-3); }
+.pillar p { color: var(--c-text-muted); max-width: 32ch; }
+@media (min-width: 48em) { .pillars { grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); } }

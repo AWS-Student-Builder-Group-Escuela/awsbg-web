@@ -1,0 +1,45 @@
+/* snake.css — Pixel snake overlay (canvas) + its pause/resume button */
+
+.snake-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 40;              /* below the header (50), above sections */
+  pointer-events: none;
+}
+
+.snake-toggle {
+  position: fixed;
+  right: var(--sp-4);
+  bottom: var(--sp-4);
+  z-index: 45;
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: var(--radius-m);
+  background: rgb(22 29 38 / 0.88);
+  color: #f3f5f8;
+  box-shadow: 0 10px 24px -10px rgb(0 0 0 / 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform var(--dur-2) var(--ease-out), border-color var(--dur-1);
+}
+.snake-toggle:hover { transform: translateY(-2px); border-color: rgb(255 255 255 / 0.4); }
+.snake-toggle .icon { width: 1.1rem; height: 1.1rem; grid-area: 1 / 1; }
+.snake-toggle .icon--play { display: none; }
+.snake-toggle.is-paused .icon--play { display: block; }
+.snake-toggle.is-paused .icon--pause { display: none; }
+/* tiny pixel tail so the button reads as "the snake's" */
+.snake-toggle__px {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  background: var(--px-orange, #f90);
+  box-shadow: -8px 0 0 var(--px-pink, #ff57e9), -16px 0 0 var(--px-purple, #ad5cff);
+  border-radius: 1px;
+}
+.snake-toggle.is-paused .snake-toggle__px { opacity: 0.4; }
+.snake-toggle[hidden], .snake-canvas[hidden] { display: none; }

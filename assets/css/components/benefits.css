@@ -1,0 +1,46 @@
+/* benefits.css — Benefits — hairline grid, two featured items */
+
+/* ==========================================================================
+   Benefits — hairline grid, two featured items
+   ========================================================================== */
+.benefits {
+  display: grid;
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+}
+.benefit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--c-bg);
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+.section--alt .benefit { background: var(--c-bg-alt); }
+.benefit::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.benefit:hover::before { transform: scaleX(1); }
+.benefit:hover { background: var(--c-surface); }
+.benefit__icon { width: 1.75rem; height: 1.75rem; color: var(--c-accent-text); }
+.benefit h3 { font-size: var(--fs-1); }
+.benefit p { color: var(--c-text-muted); font-size: var(--fs--1); }
+.benefit--feature h3 { font-size: var(--fs-3); max-width: 14ch; }
+.benefit--feature p { font-size: var(--fs-0); max-width: 36ch; }
+.benefit--feature .benefit__icon { width: 2.5rem; height: 2.5rem; margin-bottom: var(--sp-5); }
+.benefits__note { margin-top: var(--sp-5); font-size: var(--fs--1); color: var(--c-text-muted); }
+
+@media (min-width: 40em) { .benefits { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64em) {
+  .benefits { grid-template-columns: repeat(4, 1fr); }
+  .benefit--feature { grid-column: span 2; padding: var(--sp-7) var(--sp-6); }
+}

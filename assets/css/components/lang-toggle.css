@@ -1,0 +1,38 @@
+/* lang-toggle.css — ES ⇄ EN switch in the header + no-flash guard */
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 2.5rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--c-text);
+  font-family: var(--font-mono);
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  transition: border-color var(--dur-1), background-color var(--dur-1);
+}
+.lang-toggle:hover { border-color: var(--c-text); background: rgb(255 255 255 / 0.06); }
+.lang-toggle .icon { width: 1.05rem; height: 1.05rem; transition: transform 600ms var(--ease-spring, ease); }
+.lang-toggle.is-flipping .icon { transform: rotateY(360deg); }
+
+.lang-toggle__opt { color: var(--c-text-muted); opacity: 0.7; transition: color var(--dur-2), opacity var(--dur-2); }
+.lang-toggle__opt + .lang-toggle__opt::before {
+  content: "/";
+  margin-right: 0.35rem;
+  color: var(--c-line);
+}
+:root[lang="es"] .lang-toggle [data-lang-opt="es"],
+:root[lang="en"] .lang-toggle [data-lang-opt="en"] {
+  color: var(--px-orange, #f90);
+  opacity: 1;
+}
+
+/* While a non-Spanish page is being translated on load, hide it briefly.
+   Safety net: show anyway after 1.2s even if JS failed. */
+.i18n-pending body { opacity: 0; animation: i18n-reveal 0s 1.2s forwards; }
+@keyframes i18n-reveal { to { opacity: 1; } }

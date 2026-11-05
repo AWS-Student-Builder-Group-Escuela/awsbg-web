@@ -1,0 +1,70 @@
+/* join.css — Join steps */
+
+/* ==========================================================================
+   Join steps
+   ========================================================================== */
+.join { display: grid; gap: var(--sp-7); }
+.join__title h2 { max-width: 12ch; }
+.join__title p { margin-top: var(--sp-5); color: var(--c-text-muted); font-size: var(--fs-1); max-width: 34ch; }
+.join__steps { display: grid; gap: var(--sp-5); counter-reset: step; }
+.join-step {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-5);
+  align-items: center;
+  padding: var(--sp-5);
+  border: 1.5px solid var(--c-line);
+  border-radius: var(--radius-m);
+  transition: border-color var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+.join-step:hover { border-color: var(--c-accent); transform: translateY(-2px); }
+.join-step__n::before {
+  content: "Paso 0" counter(step);
+  font-family: var(--font-mono);
+  font-size: var(--fs--2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-accent-text);
+}
+.join-step h3 { font-size: var(--fs-2); margin: var(--sp-2) 0; }
+.join-step p { color: var(--c-text-muted); font-size: var(--fs--1); margin-bottom: var(--sp-4); }
+.join-step__qr {
+  width: 6.5rem;
+  padding: 0.4rem;
+  background: #fff;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--c-line);
+}
+@media (min-width: 64em) {
+  .join { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--sp-8); align-items: center; }
+  .join-step { padding: var(--sp-6); }
+  .join-step__qr { width: 8rem; }
+}
+
+/* QR thumbnail is a button that opens the enlarged view (qr-zoom.js) */
+.join-step__qr-btn {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--radius-s);
+  cursor: zoom-in;
+}
+.join-step__qr-hint {
+  position: absolute;
+  right: -0.6rem;
+  bottom: -0.6rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-m);
+  background: var(--aws-ink, #161d26);
+  color: #fff;
+  box-shadow: 0 6px 14px -6px rgb(0 0 0 / 0.5);
+  transition: transform 400ms var(--ease-spring, ease);
+}
+.join-step__qr-hint .icon { width: 1rem; height: 1rem; }
+.join-step__qr-btn:hover .join-step__qr-hint,
+.join-step__qr-btn:focus-visible .join-step__qr-hint { transform: scale(1.15) rotate(-8deg); }

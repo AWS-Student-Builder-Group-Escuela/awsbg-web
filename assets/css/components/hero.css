@@ -1,0 +1,133 @@
+/* hero.css — Hero */
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  padding-top: calc(var(--header-h) + clamp(3rem, 2rem + 6vw, 7rem));
+  padding-bottom: clamp(3.5rem, 2rem + 5vw, 6.5rem);
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--c-line);
+}
+/* Dotted engineering grid, faded toward the bottom-left */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--c-line) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 85% 30%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 70% at 85% 30%, #000 30%, transparent 75%);
+}
+.hero__grid { display: grid; gap: var(--sp-7); align-items: center; }
+.hero__kicker {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  margin-bottom: var(--sp-5);
+  font-size: var(--fs--1);
+  color: var(--c-text-muted);
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: var(--fs--2);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-text);
+}
+.tag--live::before {
+  content: "";
+  width: 0.5rem; height: 0.5rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 0 0 rgb(255 153 0 / 0.6);
+  animation: pulse 2.2s var(--ease-out) infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgb(255 153 0 / 0.55); }
+  70%, 100% { box-shadow: 0 0 0 8px rgb(255 153 0 / 0); }
+}
+
+.hero__title { max-width: 14ch; }
+.hero__title em {
+  font-style: normal;
+  position: relative;
+  white-space: nowrap;
+}
+.hero__title em::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0.06em;
+  height: 0.16em;
+  background: var(--c-accent);
+  z-index: -1;
+  transform-origin: left;
+  animation: underline-in 900ms var(--ease-out) 300ms both;
+}
+@keyframes underline-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.hero__lede {
+  max-width: 44ch;
+  margin-top: var(--sp-5);
+  font-size: var(--fs-1);
+  color: var(--c-text-muted);
+}
+.hero__actions { margin-top: var(--sp-6); }
+
+.hero__meta {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: var(--sp-6);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--c-line);
+}
+.hero__meta dt { font-size: var(--fs--2); color: var(--c-text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-mono); }
+.hero__meta dd { margin: var(--sp-1) 0 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-1); }
+
+/* Network diagram */
+.hero__visual { display: none; }
+.network { width: 100%; height: auto; overflow: visible; }
+.network__edge { stroke: var(--c-line); stroke-width: 1.5; fill: none; }
+.network__flow {
+  stroke: var(--c-accent);
+  stroke-width: 1.75;
+  fill: none;
+  stroke-dasharray: 6 10;
+  animation: flow 3.5s linear infinite;
+}
+@keyframes flow { to { stroke-dashoffset: -64; } }
+.network__node rect { fill: var(--c-surface); stroke: var(--c-line-strong); stroke-width: 1.5; }
+.network__node--hub rect { fill: var(--c-text); }
+.network__node text {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--c-text);
+}
+.network__node--hub text { fill: var(--c-bg); }
+.network__node .network__sub { font-family: var(--font-mono); font-size: 10px; font-weight: 500; fill: var(--c-text-muted); letter-spacing: 0.08em; }
+.network__node--hub .network__sub { fill: var(--c-accent); }
+.network__dot { fill: var(--c-accent); }
+
+@media (min-width: 60em) {
+  .hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--sp-8); }
+  .hero__visual { display: block; }
+}
+
+/* Page hero (subpages) */
+.page-hero { padding-bottom: clamp(3rem, 2rem + 4vw, 5rem); }
+.page-hero .hero__title { max-width: 18ch; }

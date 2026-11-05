@@ -1,0 +1,112 @@
+/* dialog.css — Shared modal (native <dialog>) + its variants:
+   .dialog--qr        enlarged QR code
+   .dialog--calendar  "add to calendar" menu */
+
+.dialog {
+  width: min(26rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--c-text);
+  overflow: visible;
+}
+.dialog::backdrop {
+  background: rgb(10 14 20 / 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.dialog__panel {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-6) var(--sp-5) var(--sp-5);
+  text-align: center;
+  background: var(--c-surface, #fff);
+  border: 1.5px solid var(--c-line-strong);
+  border-radius: var(--radius-l);
+  box-shadow: 10px 10px 0 var(--tone, var(--px-orange, #f90));
+}
+.dialog__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tone-ink, var(--c-accent-text));
+}
+.dialog__title { font-size: var(--fs-2); line-height: 1.15; max-width: 18ch; }
+.dialog__body { display: grid; justify-items: center; gap: var(--sp-3); width: 100%; }
+.dialog__hint { color: var(--c-text-muted); font-size: var(--fs--1); }
+.dialog__action { width: 100%; }
+.dialog__close {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--c-text);
+  transition: background-color var(--dur-1), transform var(--dur-2) var(--ease-out);
+}
+.dialog__close:hover { background: var(--c-bg-alt); transform: rotate(90deg); }
+
+/* ---- QR variant ---- */
+.dialog__qr-frame {
+  width: 100%;
+  margin-top: var(--sp-2);
+  padding: var(--sp-3);
+  background: #fff;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+}
+.dialog__qr-img { width: 100%; height: auto; image-rendering: pixelated; }
+
+/* ---- Calendar variant ---- */
+.cal-options { display: grid; gap: var(--sp-2); width: 100%; margin-top: var(--sp-2); }
+.cal-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1.5px solid var(--c-line);
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--c-text);
+  text-align: left;
+  text-decoration: none;
+  transition: border-color var(--dur-2), transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.cal-option:hover, .cal-option:focus-visible {
+  border-color: var(--tone);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--tone);
+}
+.cal-option__px {
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--tone);
+  box-shadow: 0.9rem 0.9rem 0 -0.2rem var(--tone);
+  margin-right: 0.3rem;
+}
+.cal-option__text strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
+.cal-option__text small { color: var(--c-text-muted); font-size: var(--fs--1); }
+.cal-option .icon { color: var(--c-text-muted); }
+
+/* ---- Open / close animation ---- */
+.dialog[open] .dialog__panel { animation: dialog-pop 450ms var(--ease-spring, ease) both; }
+.dialog[open]::backdrop { animation: dialog-fade 250ms ease both; }
+.dialog.is-closing .dialog__panel { animation: dialog-out 220ms ease forwards; }
+.dialog.is-closing::backdrop { animation: dialog-fade 220ms ease reverse forwards; }
+@keyframes dialog-pop { from { opacity: 0; transform: scale(0.6) rotate(-4deg); } to { opacity: 1; transform: none; } }
+@keyframes dialog-out { to { opacity: 0; transform: scale(0.85); } }
+@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open] .dialog__panel, .dialog[open]::backdrop { animation: none; }
+}
