@@ -81,3 +81,6 @@ assets/img/team/*.jpg
 assets/img/speakers/*.jpg
 assets/img/speakers/*.jpeg
 assets/img/speakers/*.png
+
+# Artefacto local de despliegue (lo arma el workflow)
+_site/
