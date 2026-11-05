@@ -1,0 +1,322 @@
+/* ==========================================================================
+   themes.css — Section themes, AWS community pixel palette, grid patterns,
+   mosaics and per-item colour "tones".
+   Palette taken from the community deck: squid ink #161D26, grid #656871,
+   pixels orange / purple / pink / green / blue.
+   Loaded after components.css, before motion.css.
+   ========================================================================== */
+
+:root {
+  /* Pixel palette (fills / decoration) */
+  --aws-ink: #161d26;
+  --px-orange: #ff9900;
+  --px-purple: #ad5cff;
+  --px-pink: #ff57e9;
+  --px-green: #00e582;
+  --px-blue: #42b4ff;
+
+  /* Text-safe variants on light backgrounds (all ≥ 4.5:1 on paper) */
+  --px-orange-ink: #a85600;
+  --px-purple-ink: #7b35d9;
+  --px-pink-ink: #b5179e;
+  --px-green-ink: #007a45;
+  --px-blue-ink: #0a6cc2;
+
+  --grid-line: #e4e0d8;
+  --grid: 56px;
+}
+@media (min-width: 48em) { :root { --grid: 64px; } }
+
+/* Dark mode (system or forced): text variants become the bright ones */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --px-orange-ink: var(--orange-300);
+    --px-purple-ink: #c39bff;
+    --px-pink-ink: #ff8af0;
+    --px-green-ink: var(--px-green);
+    --px-blue-ink: var(--px-blue);
+    --grid-line: rgb(255 255 255 / 0.06);
+  }
+}
+:root[data-theme="dark"] {
+  --px-orange-ink: var(--orange-300);
+  --px-purple-ink: #c39bff;
+  --px-pink-ink: #ff8af0;
+  --px-green-ink: var(--px-green);
+  --px-blue-ink: var(--px-blue);
+  --grid-line: rgb(255 255 255 / 0.06);
+}
+
+/* ==========================================================================
+   Section themes — each one re-points the semantic tokens locally, so every
+   component inside (buttons, lines, cards) adapts automatically.
+   ========================================================================== */
+.theme-ink,
+.theme-navy,
+.site-footer {
+  --c-bg: var(--aws-ink);
+  --c-bg-alt: #1c2530;
+  --c-surface: #1f2934;
+  --c-text: #f3f5f8;
+  --c-text-muted: #aab4c0;
+  --c-line: rgb(255 255 255 / 0.13);
+  --c-line-strong: #f3f5f8;
+  --c-accent-text: var(--orange-300);
+  --c-focus: #7fb0ff;
+  --grid-line: rgb(101 104 113 / 0.32);
+  --px-orange-ink: var(--orange-300);
+  --px-purple-ink: #c39bff;
+  --px-pink-ink: #ff8af0;
+  --px-green-ink: var(--px-green);
+  --px-blue-ink: var(--px-blue);
+  --shadow-offset: 6px 6px 0 var(--tone, var(--c-accent));
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  color-scheme: dark;
+}
+.theme-navy {
+  --c-bg: #0b1b33;
+  --c-bg-alt: #10264a;
+  --c-surface: #122a50;
+  --c-text-muted: #a9b8cc;
+  --grid-line: rgb(120 150 200 / 0.16);
+}
+
+.theme-green,
+.theme-pink,
+.theme-orange {
+  --c-text: #0f1419;
+  --c-text-muted: #1c2a24;
+  --c-line: rgb(15 20 25 / 0.22);
+  --c-line-strong: #0f1419;
+  --c-accent-text: #0f1419;
+  --c-surface: #ffffff;
+  --c-focus: #0f1419;
+  --grid-line: rgb(15 20 25 / 0.1);
+  --px-orange-ink: #0f1419;
+  --px-purple-ink: #0f1419;
+  --px-pink-ink: #0f1419;
+  --px-green-ink: #0f1419;
+  --px-blue-ink: #0f1419;
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  color-scheme: light;
+}
+.theme-green { --c-bg: var(--px-green); --c-bg-alt: #00d077; }
+.theme-pink { --c-bg: var(--px-pink); --c-bg-alt: #f04bdb; --c-text-muted: #2a1027; }
+.theme-orange { --c-bg: var(--px-orange); --c-bg-alt: #f08f00; }
+
+/* Dark-on-colour buttons: primary becomes ink so it doesn't vanish */
+.theme-green .btn--primary,
+.theme-pink .btn--primary,
+.theme-orange .btn--primary {
+  --btn-bg: #0f1419;
+  --btn-fg: #fff;
+  --btn-fill: #fff;
+  --btn-fill-fg: #0f1419;
+  border-color: #0f1419;
+}
+
+/* No hairline between two themed sections */
+.section[class*="theme-"] + .section,
+.section + .section[class*="theme-"] { border-top: 0; }
+
+/* ==========================================================================
+   Patterns
+   ========================================================================== */
+.pattern-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+  background-position: -1px -1px;
+}
+
+/* Hero: replace the dotted grid with the AWS line grid */
+.hero::before {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+  background-position: -1px -1px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.hero.theme-ink { border-bottom-color: transparent; }
+
+/* ==========================================================================
+   Tones — per-item colour. --tone = fill, --tone-ink = text-safe
+   ========================================================================== */
+[data-tone="orange"] { --tone: var(--px-orange); --tone-ink: var(--px-orange-ink); }
+[data-tone="purple"] { --tone: var(--px-purple); --tone-ink: var(--px-purple-ink); }
+[data-tone="pink"]   { --tone: var(--px-pink);   --tone-ink: var(--px-pink-ink); }
+[data-tone="green"]  { --tone: var(--px-green);  --tone-ink: var(--px-green-ink); }
+[data-tone="blue"]   { --tone: var(--px-blue);   --tone-ink: var(--px-blue-ink); }
+
+/* Pillars */
+.pillar[data-tone] { border-top: 4px solid var(--tone); }
+.pillar[data-tone]::after { top: -4px; height: 4px; background: var(--c-line-strong); }
+.pillar[data-tone] .pillar__icon,
+.pillar[data-tone]::before { color: var(--tone-ink); }
+
+/* Process nodes */
+.process__step[data-tone] .process__node { border-color: var(--tone); color: var(--tone-ink); }
+.process__step[data-tone]:hover .process__node { background: var(--tone); border-color: var(--tone); color: #0f1419; }
+.process__step[data-tone] .process__body h3::after {
+  content: "";
+  display: inline-block;
+  width: 0.45em; height: 0.45em;
+  margin-left: 0.35em;
+  background: var(--tone);
+  vertical-align: 0.1em;
+}
+
+/* Benefits */
+.benefit[data-tone] .benefit__icon { color: var(--tone-ink); }
+.benefit[data-tone]::before { background: var(--tone); }
+.benefit[data-tone]::after {
+  background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--tone) 22%, transparent), transparent 65%);
+}
+
+/* Team */
+.member[data-tone] .member__role { color: var(--tone-ink); }
+.member[data-tone]:hover .avatar,
+.member[data-tone]:focus-within .avatar { box-shadow: 6px 6px 0 var(--tone); }
+.member[data-tone] .avatar::after { background: var(--tone); }
+.member[data-tone] .avatar__initials { color: var(--c-text); }
+.member[data-tone] .avatar { background-image: repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in srgb, var(--tone) 18%, transparent) 10px 11px); }
+
+/* Talks, join steps, facts */
+.talk[data-tone] .talk__label { color: var(--tone-ink); }
+.talk[data-tone] { border-top-color: var(--tone); border-top-width: 4px; }
+.talk[data-tone]:hover .avatar { box-shadow: 4px 4px 0 var(--tone); }
+.join-step[data-tone]:hover { border-color: var(--tone); }
+.join-step[data-tone]:hover .join-step__qr { box-shadow: 4px 4px 0 var(--tone); }
+.join-step[data-tone] .join-step__n::before { color: var(--tone-ink); }
+.facts-bar [data-tone] .icon { color: var(--tone-ink); }
+
+/* Network diagram tones */
+.network__node[data-tone] rect { stroke: var(--tone); }
+.network__node[data-tone] .network__sub { fill: var(--tone); }
+.network__flow[data-tone] { stroke: var(--tone); }
+.network__packet[data-tone] { fill: var(--tone); }
+
+/* ==========================================================================
+   Section-specific colour treatments
+   ========================================================================== */
+
+/* Marquee on orange: separators cycle through the pixel colours */
+.marquee.theme-orange { border-bottom: 0; }
+.marquee.theme-orange .marquee__item--outline { -webkit-text-stroke-color: #0f1419; }
+.marquee__item:nth-child(5n + 1)::after { background: var(--aws-ink); }
+.marquee__item:nth-child(5n + 2)::after { background: var(--px-purple); }
+.marquee__item:nth-child(5n + 3)::after { background: var(--px-pink); }
+.marquee__item:nth-child(5n + 4)::after { background: var(--px-green); }
+.marquee__item:nth-child(5n + 5)::after { background: var(--px-blue); }
+
+/* Stats on green: ink numbers with a pixel "cursor" */
+.theme-green .stat__value span { color: #0f1419; }
+.theme-green .stat__value::after {
+  content: "";
+  display: inline-block;
+  width: 0.14em; height: 0.14em;
+  margin-left: 0.06em;
+  background: #0f1419;
+}
+.theme-green .stat { border-top-color: rgb(15 20 25 / 0.35); }
+
+/* Launch ticket on pink */
+.theme-pink .ticket { box-shadow: 10px 10px 0 #0f1419; }
+
+/* Footer: pixel strip on top */
+.site-footer { position: relative; }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 16px;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--px-orange) 0 16px, transparent 16px 48px,
+      var(--px-purple) 48px 64px, transparent 64px 96px,
+      var(--px-pink) 96px 112px, transparent 112px 160px,
+      var(--px-green) 160px 176px, transparent 176px 208px,
+      var(--px-blue) 208px 224px, transparent 224px 256px);
+}
+.site-footer .brand__mark { background: #f3f5f8; color: var(--aws-ink); }
+.site-footer .brand__text small { color: var(--c-text-muted); }
+.site-footer .footer__cols h2 { color: var(--c-text-muted); }
+
+/* ==========================================================================
+   Mosaics (pixel-art blocks rendered by pixels.js)
+   ========================================================================== */
+.mosaic {
+  position: absolute;
+  z-index: 0;
+  width: calc(var(--mosaic-cell, 12px) * var(--mosaic-cols, 7));
+  pointer-events: none;
+}
+.mosaic svg { width: 100%; height: auto; overflow: visible; }
+.mosaic--tr { top: var(--sp-6); right: var(--gutter); }
+.mosaic--br { bottom: var(--sp-6); right: var(--gutter); }
+.mosaic--bl { bottom: var(--sp-6); left: var(--gutter); }
+.mosaic--tl { top: var(--sp-6); left: var(--gutter); }
+@media (min-width: 48em) { .mosaic { --mosaic-cell: 16px; } }
+@media (min-width: 80em) { .mosaic { --mosaic-cell: 20px; } }
+/* Keep content above mosaics */
+.section > .container { position: relative; z-index: 1; }
+/* On small screens only show mosaics that don't collide with headings */
+@media (max-width: 47.99em) { .mosaic--tr, .mosaic--tl { opacity: 0.35; } }
+
+.mosaic rect { transform-box: fill-box; transform-origin: center; }
+.mosaic__px--o { fill: var(--px-orange); }
+.mosaic__px--p { fill: var(--px-purple); }
+.mosaic__px--k { fill: var(--px-pink); }
+.mosaic__px--g { fill: var(--px-green); }
+.mosaic__px--b { fill: var(--px-blue); }
+.mosaic__px--i { fill: var(--c-text); } /* ink in light sections, light in dark mode */
+.mosaic__px--w { fill: #ffffff; }
+
+/* ==========================================================================
+   Pixel field (twinkling cells aligned to the hero grid; built by pixels.js)
+   ========================================================================== */
+.pixel-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(100deg, transparent 0%, transparent 35%, rgb(0 0 0 / 0.55) 60%, #000 85%);
+  mask-image: linear-gradient(100deg, transparent 0%, transparent 35%, rgb(0 0 0 / 0.55) 60%, #000 85%);
+}
+/* Narrow screens: text spans the full width, so any pixel would sit behind it */
+@media (max-width: 59.99em) {
+  .pixel-field { display: none; }
+}
+.pixel {
+  position: absolute;
+  width: calc(var(--grid) - 1px);
+  height: calc(var(--grid) - 1px);
+  background: var(--px, var(--px-orange));
+  opacity: 0;
+}
+.pixel.is-static { opacity: 0.85; }
+
+/* Small accent sprites (sparkles, dots) */
+.mosaic--sm { --mosaic-cell: 8px; }
+@media (min-width: 48em) { .mosaic--sm { --mosaic-cell: 10px; } }
+@media (min-width: 80em) { .mosaic--sm { --mosaic-cell: 12px; } }
+
+/* ==========================================================================
+   Footer: "Hecho con ♥"
+   ========================================================================== */
+.footer__love {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: var(--sp-4);
+  font-size: var(--fs--1);
+  color: var(--c-text-muted);
+}
+.footer__heart { width: 1.1em; height: 1em; color: var(--px-pink); }
