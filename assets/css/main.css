@@ -1,0 +1,39 @@
+/* ==========================================================================
+   main.css — Single stylesheet entry point. ORDER MATTERS (cascade):
+   settings → base → components → pages → themes → motion
+   Add a new component: create components/<name>.css and import it below.
+   ========================================================================== */
+
+/* 1. Settings: design tokens (no selectors except :root) */
+@import url("settings/tokens.css");
+
+/* 2. Base: reset, typography, layout primitives */
+@import url("base/base.css");
+@import url("base/layout.css");
+
+/* 3. Components (one file per UI block) */
+@import url("components/buttons.css");
+@import url("components/header.css");
+@import url("components/hero.css");
+@import url("components/pillars.css");
+@import url("components/process.css");
+@import url("components/stats.css");
+@import url("components/checklist.css");
+@import url("components/benefits.css");
+@import url("components/team.css");
+@import url("components/ticket.css");
+@import url("components/join.css");
+@import url("components/footer.css");
+@import url("components/lang-toggle.css");
+@import url("components/snake.css");
+@import url("components/dialog.css");
+
+/* 4. Page-specific */
+@import url("pages/launch.css");
+@import url("pages/404.css");
+
+/* 5. Themes: section colours, AWS pixel palette, patterns, mosaics */
+@import url("themes/themes.css");
+
+/* 6. Motion: animations & micro-interactions (always last) */
+@import url("motion/motion.css");
