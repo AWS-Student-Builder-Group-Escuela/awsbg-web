@@ -265,8 +265,23 @@
 @media (min-width: 80em) { .mosaic { --mosaic-cell: 20px; } }
 /* Keep content above mosaics */
 .section > .container { position: relative; z-index: 1; }
-/* On small screens only show mosaics that don't collide with headings */
-@media (max-width: 47.99em) { .mosaic--tr, .mosaic--tl { opacity: 0.35; } }
+/* Small screens: there's no free corner, so the big sprites join the flow
+   (above the content for top corners, below it for bottom ones) instead of
+   sitting on top of headings, tickets or QR codes. Small accents stay absolute. */
+@media (max-width: 47.99em) {
+  .section:has(> .mosaic:not(.mosaic--sm)) { display: flex; flex-direction: column; }
+  .mosaic:not(.mosaic--sm) {
+    position: relative;
+    inset: auto;
+    flex: none;
+    margin-inline: var(--gutter);
+    --mosaic-cell: 8px;
+  }
+  .mosaic--tr:not(.mosaic--sm), .mosaic--tl:not(.mosaic--sm) { order: -1; margin-bottom: var(--sp-5); }
+  .mosaic--br:not(.mosaic--sm), .mosaic--bl:not(.mosaic--sm) { order: 1; margin-top: var(--sp-6); }
+  .mosaic--tr:not(.mosaic--sm), .mosaic--br:not(.mosaic--sm) { align-self: flex-end; }
+  .mosaic--tl:not(.mosaic--sm), .mosaic--bl:not(.mosaic--sm) { align-self: flex-start; }
+}
 
 .mosaic rect { transform-box: fill-box; transform-origin: center; }
 .mosaic__px--o { fill: var(--px-orange); }
