@@ -6,7 +6,7 @@
 
 import { t } from './i18n.js';
 
-const DESKTOP = window.matchMedia('(min-width: 64em)');
+const DESKTOP = window.matchMedia('(min-width: 72em)'); // keep in sync with header.css
 
 export function initNav() {
   const header = document.querySelector('[data-header]');

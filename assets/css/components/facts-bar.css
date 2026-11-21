@@ -1,0 +1,25 @@
+/* facts-bar.css — Hairline strip of key facts under a page hero
+   (launches, courses). .facts-bar--5 lays out five items. */
+
+.facts-bar {
+  display: grid;
+  gap: 1px;
+  background: var(--c-line);
+  border-block: 1px solid var(--c-line);
+}
+.facts-bar > div { padding: var(--sp-5) var(--gutter); background: var(--c-bg); display: flex; gap: var(--sp-4); align-items: flex-start; }
+.facts-bar .icon { width: 1.5rem; height: 1.5rem; flex: none; color: var(--c-accent-text); margin-top: 0.2rem; }
+.facts-bar dt { font-family: var(--font-mono); font-size: var(--fs--2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted); }
+.facts-bar dl { margin: 0; }
+.facts-bar dd { margin: var(--sp-1) 0 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-1); }
+@media (min-width: 48em) {
+  .facts-bar { grid-template-columns: repeat(2, 1fr); }
+  .facts-bar--5 > :last-child { grid-column: 1 / -1; } /* no orphan cell in the 2-col layout */
+}
+@media (min-width: 72em) {
+  .facts-bar { grid-template-columns: repeat(4, 1fr); }
+  .facts-bar > div { padding-inline: var(--sp-6); }
+  .facts-bar--5 { grid-template-columns: repeat(5, 1fr); }
+  .facts-bar--5 > :last-child { grid-column: auto; }
+  .facts-bar--5 > div { padding-inline: var(--sp-5); }
+}

@@ -12,7 +12,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
-const PAGES = ['index.html', 'lanzamiento.html', '404.html'];
+const PAGES = ['index.html', 'lanzamientos.html', 'cursos.html', 'lanzamiento.html', '404.html'];
 const SPRITE = 'assets/img/icons/sprite.svg';
 
 const errors = [];

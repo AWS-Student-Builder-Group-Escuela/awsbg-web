@@ -78,7 +78,9 @@ npm start              # http://localhost:3000  (scripts/serve.mjs, sin dependen
 | Ruta | Página |
 |---|---|
 | `/` | Landing (`index.html`) |
-| `/lanzamiento.html` | Evento de lanzamiento |
+| `/cursos.html` | Convocatoria de cursos gratuitos de AWS Academy |
+| `/lanzamientos.html` | Registro de lanzamientos (eventos realizados) |
+| `/lanzamiento.html` | Redirección a `/lanzamientos.html` (URL antigua usada en QR y Meetup) |
 | `/404.html` | Página de error (GitHub Pages la sirve automáticamente) |
 
 **Animaciones en local:** si el sistema operativo tiene activado *reducir movimiento*, el sitio se muestra estático a propósito (`prefers-reduced-motion`). En Windows se controla en *Configuración → Accesibilidad → Efectos visuales → Efectos de animación*.
@@ -90,7 +92,9 @@ npm start              # http://localhost:3000  (scripts/serve.mjs, sin dependen
 ```
 .
 ├── index.html                 # Landing
-├── lanzamiento.html           # Página del evento
+├── cursos.html                # Cursos AWS Academy
+├── lanzamientos.html          # Registro de lanzamientos
+├── lanzamiento.html           # Redirección (URL antigua)
 ├── 404.html                   # Error 404 (sin JS)
 ├── .github/workflows/
 │   └── deploy.yml             # Pipeline CI/CD (verificar → desplegar)
@@ -108,7 +112,7 @@ npm start              # http://localhost:3000  (scripts/serve.mjs, sin dependen
     │   ├── settings/          # tokens.css — custom properties (diseño, tema claro/oscuro)
     │   ├── base/              # base.css (reset, tipografía, foco) · layout.css
     │   ├── components/        # Un archivo por componente de UI
-    │   ├── pages/             # Estilos exclusivos de una página (launch.css, 404.css)
+    │   ├── pages/             # Estilos exclusivos de una página (lanzamientos.css, 404.css)
     │   ├── themes/            # themes.css — temas por sección, paleta, mosaicos
     │   └── motion/            # motion.css — animaciones (último en la cascada)
     ├── js/
@@ -156,14 +160,13 @@ Para agregar un componente, crea `components/<nombre>.css` y añade su `@import`
 | # | Módulo | Responsabilidad |
 |---|---|---|
 | 1 | `pixels.js` | Renderiza mosaicos SVG desde `data/mosaics.js` y el campo de píxeles del hero. |
-| 2 | `motion.js` | Divide títulos en palabras (`splitWords`/`unsplitWords`), efectos de puntero, barra de progreso y `confetti()`. |
+| 2 | `motion.js` | Divide títulos en palabras (`splitWords`/`unsplitWords`), efectos de puntero y barra de progreso. |
 | 3 | `i18n.js` | Traduce el DOM. Debe ir **después** de `motion`, porque vuelve a dividir los títulos ya divididos. |
 | 4 | `theme.js` | Alterna modo claro/oscuro. |
 | 5 | `nav.js` | Header (compacto, oculto al bajar), menú móvil, *scroll-spy* e indicador del enlace activo. |
 | 6 | `reveal.js` | `IntersectionObserver` sobre `[data-reveal]` y contadores `[data-count]`. Va **después** de `pixels`, `motion` e `i18n`, que crean nuevos `[data-reveal]`. |
-| 7 | `launch.js` | Cuenta regresiva y menú "Agregar al calendario" (Google Calendar, Outlook, `.ics`). El objeto `EVENT` es la única fuente de los datos del evento. |
-| 8 | `snake.js` | Serpiente en `<canvas>` fijo que recorre los márgenes laterales. |
-| 9 | `qr-zoom.js` | Abre los QR en grande. |
+| 7 | `snake.js` | Serpiente en `<canvas>` fijo que recorre los márgenes laterales. |
+| 8 | `qr-zoom.js` | Abre los QR en grande. |
 | — | `dialog.js` | Utilidad compartida (no se inicializa): `createDialog()` sobre `<dialog>` nativo, con foco atrapado, Esc, clic en el fondo y cierre animado. |
 
 Los módulos se comunican con el evento global `langchange` (`document.dispatchEvent`), que se emite al cambiar de idioma.
@@ -210,9 +213,7 @@ Las clases de tema (`theme-ink`, `theme-navy`, `theme-green`, `theme-pink`, `the
 | `data-magnetic` | botón | Efecto magnético |
 | `data-mosaic="nombre"` (`data-color`) | `div.mosaic` | Sprite de `data/mosaics.js` (`x` = color de acento) |
 | `data-pixel-field` | sección | Píxeles que titilan sobre la cuadrícula |
-| `data-add-calendar` | botón | Abre el menú de calendario |
 | `data-qr-zoom` | botón con `<img>` | Abre el QR ampliado |
-| `data-countdown` | contenedor | Cuenta regresiva (`[data-unit="d\|h\|m\|s"]`) |
 
 Clases de mosaico: posición `mosaic--tr|tl|br|bl`, tamaño `mosaic--sm` y animación `mosaic--float`.
 
@@ -266,12 +267,12 @@ push / pull_request ─▶ verify ──(solo main, si pasa)──▶ deploy ─
 | Job | Cuándo | Pasos |
 |---|---|---|
 | **verify** | Push a `main`, PR hacia `main` y ejecución manual | `npm ci` → `test:html` → `test:links` → `test:a11y` (Chrome del runner) |
-| **deploy** | Solo push a `main`, y solo si `verify` pasó | Arma `_site/` con `index.html`, `lanzamiento.html`, `404.html` y `assets/` → `upload-pages-artifact` → `deploy-pages` |
+| **deploy** | Solo push a `main`, y solo si `verify` pasó | Arma `_site/` con `index.html`, `lanzamientos.html`, `cursos.html`, `lanzamiento.html`, `404.html` y `assets/` → `upload-pages-artifact` → `deploy-pages` |
 
 - **Qué verifica:**
   - **HTML:** html-validate con las reglas *recommended*. Se permiten solo los estilos en línea `--d` e `--i`, que usa el sistema de animación.
   - **Enlaces:** archivos locales, anclas (también entre páginas), íconos del sprite (incluidos los generados desde JS), cadena de `@import` CSS, grafo de `import` JS y nombres de `data-mosaic`.
-  - **Accesibilidad y runtime:** 2 páginas × ES/EN × claro/oscuro, más el menú de calendario abierto. Falla si hay violaciones WCAG 2 A/AA, errores de JS o de consola, o respuestas 4xx/5xx.
+  - **Accesibilidad y runtime:** 3 páginas × ES/EN × claro/oscuro. Falla si hay violaciones WCAG 2 A/AA, errores de JS o de consola, o respuestas 4xx/5xx.
 - **Qué se publica:** solo el sitio. README, scripts, `package.json` y la configuración del repo no llegan a producción.
 - **Concurrencia:** un PR nuevo cancela su ejecución anterior; los despliegues de `main` nunca se cancelan a medias.
 - **Permisos:** mínimos (`contents: read`). Solo el job de despliegue recibe `pages: write` e `id-token: write`.
@@ -298,7 +299,7 @@ Navegadores *evergreen* recientes (Chrome/Edge, Firefox, Safari). Funciones que 
 | Función | Requisito | Si no está disponible |
 |---|---|---|
 | Interacciones | JavaScript habilitado (ES modules) | Sin JS: todo el contenido visible y estático |
-| Ventanas modales | `<dialog>` | El calendario descarga el `.ics` directamente |
+| Ventanas modales | `<dialog>` | Los QR no se amplían |
 | Transición entre páginas | View Transitions (`@view-transition`) | Navegación normal |
 | Logo del header | `:has()` | Sin fondo de respaldo |
 | Foco de luz por tono | `color-mix()` | Sin foco de color |
@@ -315,7 +316,7 @@ A partir de ahí, cada push a `main` corre el pipeline y, si pasa, publica en 1�
 
 Para volver a desplegar sin cambios: *Actions → CI/CD · GitHub Pages → Run workflow*.
 
-La imagen para redes (`og:image`) usa una URL absoluta al dominio de producción. Si cambia el dominio, actualiza ese meta en `index.html` y `lanzamiento.html`.
+La imagen para redes (`og:image`) usa una URL absoluta al dominio de producción. Si cambia el dominio, actualiza ese meta en `index.html`, `lanzamientos.html` y `cursos.html`.
 
 ---
 

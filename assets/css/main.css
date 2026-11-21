@@ -22,6 +22,8 @@
 @import url("components/benefits.css");
 @import url("components/team.css");
 @import url("components/ticket.css");
+@import url("components/facts-bar.css");
+@import url("components/courses.css");
 @import url("components/join.css");
 @import url("components/footer.css");
 @import url("components/lang-toggle.css");
@@ -29,7 +31,7 @@
 @import url("components/dialog.css");
 
 /* 4. Page-specific */
-@import url("pages/launch.css");
+@import url("pages/lanzamientos.css");
 @import url("pages/404.css");
 
 /* 5. Themes: section colours, AWS pixel palette, patterns, mosaics */

@@ -1,0 +1,27 @@
+/* lanzamientos.css — Launches page specifics (talks + agenda) */
+
+.talks { display: grid; gap: var(--sp-7); }
+.talk { display: grid; gap: var(--sp-5); padding-top: var(--sp-5); border-top: 1.5px solid var(--c-line-strong); }
+.talk__label { font-family: var(--font-mono); font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-accent-text); }
+.talk h3 { font-size: var(--fs-3); max-width: 18ch; }
+.talk p { color: var(--c-text-muted); max-width: 42ch; }
+.speaker { display: flex; align-items: center; gap: var(--sp-4); }
+.speaker .avatar { width: 6rem; aspect-ratio: 1; flex: none; }
+.talk:hover .avatar img { filter: none; transform: scale(1.04); }
+.speaker .avatar__initials { font-size: var(--fs-2); }
+.speaker strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
+.speaker span { color: var(--c-text-muted); font-size: var(--fs--1); }
+.talk:hover .avatar { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--c-accent); }
+@media (min-width: 64em) { .talks { grid-template-columns: 1fr 1fr; gap: var(--sp-8); } }
+
+.agenda { border-top: 1px solid var(--c-line-strong); }
+.agenda li {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--c-line);
+}
+.agenda time, .agenda__slot { font-family: var(--font-mono); font-size: var(--fs--1); color: var(--c-text-muted); padding-top: 0.2rem; }
+.agenda strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
+.agenda span { color: var(--c-text-muted); font-size: var(--fs--1); }

@@ -335,7 +335,7 @@
 }
 
 /* ==========================================================================
-   Ticket / join / countdown
+   Ticket / join
    ========================================================================== */
 .ticket__day { font-variant-numeric: tabular-nums; }
 .js .ticket.is-visible .ticket__date { animation: ticket-date 1.2s var(--ease-out-expo) both 150ms; }
@@ -343,24 +343,6 @@
 
 .join-step__qr { transition: transform 500ms var(--ease-spring), box-shadow var(--dur-2) var(--ease-out); }
 .join-step:hover .join-step__qr { transform: rotate(-3deg) scale(1.06); box-shadow: 4px 4px 0 var(--c-accent); }
-
-.countdown__num.is-ticking { animation: tick 500ms var(--ease-out-expo); }
-@keyframes tick {
-  from { opacity: 0; transform: translateY(-45%); }
-  to { opacity: 1; transform: none; }
-}
-.countdown__cell { transition: background-color var(--dur-2); }
-.countdown__cell:hover { background: var(--c-bg-alt); }
-
-/* Confetti pieces (positioned by JS, animated with WAAPI) */
-.confetti {
-  position: fixed;
-  z-index: 200;
-  top: 0; left: 0;
-  width: 9px; height: 14px;
-  pointer-events: none;
-  border-radius: 1px;
-}
 
 /* ==========================================================================
    Reduced motion: final states, no decorative movement

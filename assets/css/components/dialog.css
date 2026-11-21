@@ -1,6 +1,5 @@
-/* dialog.css — Shared modal (native <dialog>) + its variants:
-   .dialog--qr        enlarged QR code
-   .dialog--calendar  "add to calendar" menu */
+/* dialog.css — Shared modal (native <dialog>) + its variant:
+   .dialog--qr        enlarged QR code */
 
 .dialog {
   width: min(26rem, calc(100vw - 2rem));
@@ -65,39 +64,6 @@
   border-radius: var(--radius-m);
 }
 .dialog__qr-img { width: 100%; height: auto; image-rendering: pixelated; }
-
-/* ---- Calendar variant ---- */
-.cal-options { display: grid; gap: var(--sp-2); width: 100%; margin-top: var(--sp-2); }
-.cal-option {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: var(--sp-3);
-  width: 100%;
-  padding: var(--sp-3) var(--sp-4);
-  border: 1.5px solid var(--c-line);
-  border-radius: var(--radius-m);
-  background: transparent;
-  color: var(--c-text);
-  text-align: left;
-  text-decoration: none;
-  transition: border-color var(--dur-2), transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
-}
-.cal-option:hover, .cal-option:focus-visible {
-  border-color: var(--tone);
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--tone);
-}
-.cal-option__px {
-  width: 0.9rem;
-  height: 0.9rem;
-  background: var(--tone);
-  box-shadow: 0.9rem 0.9rem 0 -0.2rem var(--tone);
-  margin-right: 0.3rem;
-}
-.cal-option__text strong { display: block; font-family: var(--font-display); font-size: var(--fs-1); }
-.cal-option__text small { color: var(--c-text-muted); font-size: var(--fs--1); }
-.cal-option .icon { color: var(--c-text-muted); }
 
 /* ---- Open / close animation ---- */
 .dialog[open] .dialog__panel { animation: dialog-pop 450ms var(--ease-spring, ease) both; }

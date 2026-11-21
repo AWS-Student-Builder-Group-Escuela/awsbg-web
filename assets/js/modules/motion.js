@@ -1,5 +1,5 @@
 // motion.js — Split-text headings, pointer effects (glow, parallax, tilt,
-// spotlight, magnetic), scroll progress, network packets and confetti.
+// spotlight, magnetic), scroll progress and network packets.
 // Decorative pointer effects only run on fine pointers without reduced motion.
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -202,39 +202,6 @@ function initMagnetic() {
       el.style.removeProperty('--mag-y');
     });
   });
-}
-
-/* --------------------------------------------------------------------------
-   Confetti burst (Web Animations API, DOM nodes removed when done)
-   -------------------------------------------------------------------------- */
-const CONFETTI_COLORS = ['#ff9900', '#ffb547', '#0f1419', '#11284a', '#1d5fd1', '#ffffff'];
-
-export function confetti(x = window.innerWidth / 2, y = window.innerHeight / 2, count = 36) {
-  if (!motionOK() || typeof Element.prototype.animate !== 'function') return;
-  for (let i = 0; i < count; i++) {
-    const piece = document.createElement('span');
-    piece.className = 'confetti';
-    piece.style.background = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
-    if (i % 3 === 0) { piece.style.width = '7px'; piece.style.height = '7px'; piece.style.borderRadius = '50%'; }
-    document.body.append(piece);
-
-    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-    const velocity = 120 + Math.random() * 180;
-    const dx = Math.cos(angle) * velocity;
-    const dy = Math.sin(angle) * velocity - 140;
-    const spin = (Math.random() - 0.5) * 900;
-
-    piece
-      .animate(
-        [
-          { transform: `translate(${x}px, ${y}px) rotate(0deg)`, opacity: 1 },
-          { transform: `translate(${x + dx}px, ${y + dy}px) rotate(${spin / 2}deg)`, opacity: 1, offset: 0.45 },
-          { transform: `translate(${x + dx * 1.3}px, ${y + dy + 320}px) rotate(${spin}deg)`, opacity: 0 },
-        ],
-        { duration: 1300 + Math.random() * 700, easing: 'cubic-bezier(0.2, 0.6, 0.4, 1)', fill: 'forwards' }
-      )
-      .finished.then(() => piece.remove());
-  }
 }
 
 /* -------------------------------------------------------------------------- */

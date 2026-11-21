@@ -158,8 +158,8 @@
 .nav__cta { margin-top: var(--sp-5); }
 .nav__indicator { display: none; }
 
-/* ---- Desktop: inline links with a sliding pill ---- */
-@media (min-width: 64em) {
+/* ---- Desktop: inline links with a sliding pill (72em: 6 links + tools need the room) ---- */
+@media (min-width: 72em) {
   .nav__toggle { display: none; }
   .nav { gap: var(--sp-3); }
   .nav__menu {
@@ -185,6 +185,7 @@
     font-family: var(--font-body);
     font-size: var(--fs--1);
     font-weight: 500;
+    white-space: nowrap;
     color: var(--c-text-muted);
     transition: color var(--dur-1);
   }
@@ -227,12 +228,17 @@
 }
 
 /* ---- Small screens: short brand + compact language switch ---- */
-.brand__short { display: none; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em; }
+.brand__short { display: none; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em; white-space: nowrap; }
 @media (max-width: 35.99em) {
   .site-header__bar .brand__text { display: none; }
   .site-header__bar .brand__short { display: inline; }
   .lang-toggle .icon { display: none; }
   .lang-toggle { padding: 0 0.5rem; }
+}
+/* Small desktops: inline links + full brand don't fit side by side */
+@media (min-width: 72em) and (max-width: 89.99em) {
+  .site-header__bar .brand__text { display: none; }
+  .site-header__bar .brand__short { display: inline; }
 }
 
 /* Brand mark with the official logo image */

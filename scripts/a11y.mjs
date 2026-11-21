@@ -2,7 +2,6 @@
 // For each page × language (es/en) × colour scheme (light/dark):
 //   · no axe violations (content forced to its final, revealed state)
 //   · no JS errors, no console errors, no failed requests (4xx/5xx)
-// Plus: the "add to calendar" dialog is audited while open.
 //
 //   node scripts/a11y.mjs
 //   CHROME_PATH=/path/to/chrome node scripts/a11y.mjs
@@ -23,7 +22,7 @@ const CHROME = process.env.CHROME_PATH || {
   linux: '/usr/bin/google-chrome',
 }[process.platform];
 
-const PAGES = ['/', '/lanzamiento.html'];
+const PAGES = ['/', '/lanzamientos.html', '/cursos.html'];
 const LANGS = ['es', 'en'];
 const SCHEMES = ['light', 'dark'];
 
@@ -43,8 +42,8 @@ const runAxe = (page) =>
     return r.violations.map((v) => `${v.id} (${v.nodes.length}): ${v.nodes[0]?.target.join(' ')}`);
   });
 
-async function audit(path, lang, scheme, { openCalendar = false } = {}) {
-  const label = `${path} [${lang}/${scheme}${openCalendar ? '/calendario' : ''}]`;
+async function audit(path, lang, scheme) {
+  const label = `${path} [${lang}/${scheme}]`;
   const page = await browser.newPage();
   const issues = [];
   page.on('pageerror', (e) => issues.push(`JS: ${e.message}`));
@@ -60,11 +59,6 @@ async function audit(path, lang, scheme, { openCalendar = false } = {}) {
   await page.goto(BASE + path, { waitUntil: 'networkidle0' });
   await page.evaluate(() => document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible')));
 
-  if (openCalendar) {
-    await page.evaluate(() => document.querySelector('[data-add-calendar]')?.click());
-    await page.waitForSelector('.dialog--calendar[open]', { timeout: 3000 }).catch(() => issues.push('el menú de calendario no abrió'));
-  }
-
   await page.evaluate(AXE);
   for (const v of await runAxe(page)) issues.push(`axe: ${v}`);
 
@@ -79,8 +73,6 @@ async function audit(path, lang, scheme, { openCalendar = false } = {}) {
 
 try {
   for (const path of PAGES) for (const lang of LANGS) for (const scheme of SCHEMES) await audit(path, lang, scheme);
-  await audit('/lanzamiento.html', 'es', 'light', { openCalendar: true });
-  await audit('/lanzamiento.html', 'en', 'dark', { openCalendar: true });
 } finally {
   await browser.close();
   server.close();

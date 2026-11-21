@@ -1,0 +1,47 @@
+/* courses.css — AWS Academy course cards (cursos.html).
+   Colour per card comes from [data-tone] (--tone / --tone-ink, see themes.css). */
+
+.courses { display: grid; gap: var(--sp-5); }
+
+.course {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--c-bg);
+  border: 1.5px solid var(--c-line);
+  border-top: 4px solid var(--tone, var(--c-accent));
+  border-radius: var(--radius-m);
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.course:hover,
+.course:focus-within { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--tone, var(--c-accent)); }
+
+.course__n { font-family: var(--font-mono); font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tone-ink, var(--c-accent-text)); }
+.course__title { font-size: var(--fs-2); max-width: 22ch; }
+.course__desc { color: var(--c-text-muted); max-width: 48ch; }
+
+/* Certification badge: a block (long official names must wrap, not clip) */
+.course__cert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--radius-s);
+  background: color-mix(in srgb, var(--tone, var(--c-accent)) 10%, transparent);
+}
+.course__cert .icon { width: 1.25rem; height: 1.25rem; flex: none; margin-top: 0.15rem; color: var(--tone-ink, var(--c-accent-text)); }
+.course__cert small { display: block; font-family: var(--font-mono); font-size: var(--fs--2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-muted); }
+.course__cert strong { display: block; font-family: var(--font-display); font-weight: 600; }
+
+.course__cta { margin-top: auto; align-self: flex-start; }
+
+@media (min-width: 48em) {
+  .courses { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+  .course { padding: var(--sp-7) var(--sp-6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course:hover, .course:focus-within { transform: none; }
+}

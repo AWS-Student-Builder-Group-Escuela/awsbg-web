@@ -70,7 +70,7 @@ jobs:
       - name: Preparar el artefacto del sitio
         run: |
           mkdir -p _site
-          cp index.html lanzamiento.html 404.html _site/
+          cp index.html lanzamientos.html cursos.html lanzamiento.html 404.html _site/
           cp -r assets _site/
           echo "Archivos publicados: $(find _site -type f | wc -l)"
 

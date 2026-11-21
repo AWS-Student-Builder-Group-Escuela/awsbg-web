@@ -10,7 +10,6 @@ import { initPixels } from './modules/pixels.js';
 import { initMotion } from './modules/motion.js';
 import { initI18n } from './modules/i18n.js';
 import { initReveal } from './modules/reveal.js';
-import { initLaunch } from './modules/launch.js';
 import { initSnake } from './modules/snake.js';
 import { initQrZoom } from './modules/qr-zoom.js';
 
@@ -20,7 +19,6 @@ initI18n();
 initTheme();
 initNav();
 initReveal();
-initLaunch();
 initSnake();
 initQrZoom();
 

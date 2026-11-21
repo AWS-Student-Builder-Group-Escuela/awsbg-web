@@ -1,6 +1,6 @@
 // dialog.js — Shared modal built on the native <dialog>:
 // focus trap + Esc for free, closes on backdrop click, animated close,
-// focus returns to the element that opened it. Used by qr-zoom and launch.
+// focus returns to the element that opened it. Used by qr-zoom.
 
 import { t } from './i18n.js';
 
